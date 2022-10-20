@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "9hvMzWAoj+wefm9Tz1k3kpMKJNRRPvM1PxhLDrZQOBF6SxfXHRyTlcHDMkjW7rRXmn8mUuiA3JoEzrWnJILhHg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Jennings\\Documents\\GitHub\\final_project_VEJ_S\\opti_api\\Opti_Api_5\\Opti_Api_5\\Opti_Api_5.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jennings\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Jennings\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Jennings\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Jennings\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Jennings\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Jennings\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
