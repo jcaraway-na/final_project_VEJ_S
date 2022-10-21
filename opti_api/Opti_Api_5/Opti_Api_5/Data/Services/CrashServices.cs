@@ -54,6 +54,6 @@ namespace Opti_Api_5.Data.Services
             _context.SaveChanges();
         }
 
-        public List<CrashModel> GetAllWells() => _context.Crash.ToList();
+        public List<CrashModel> GetAllCrashes() => _context.Crash.ToList();
     }
 }

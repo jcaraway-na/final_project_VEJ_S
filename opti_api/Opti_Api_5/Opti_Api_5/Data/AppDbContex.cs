@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace Opti_Api_5.Data
 {
-    public class AppDbContex
+    public class AppDbContex : DbContext
     {
+        public AppDbContex(DbContextOptions<AppDbContex> options) : base(options)
+        {
+
+        }
+
         public DbSet<CrashModel> Crash { get; set; }
     }
 }
