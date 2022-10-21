@@ -12,9 +12,9 @@
     <td align=center>vtg401009</td>
   </tr>
   <tr>
-    <td align=center>Square</td>
-    <td align=center>Triangle</td>
-    <td align=center>Circle</td>
+    <td align=center>Square & X</td>
+    <td align=center>Triangle & X</td>
+    <td align=center>Circle & X</td>
   </tr>
   <tr>
     <td width=100>
