@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Opti_Api_5.Data.DTOs;
-using Opti_Api_5.Models;
+using Opti_Api_5.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

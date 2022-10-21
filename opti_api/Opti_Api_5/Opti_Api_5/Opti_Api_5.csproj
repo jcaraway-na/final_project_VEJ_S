@@ -18,11 +18,4 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Data\Models\" />
-    <Folder Include="Data\DTOs\" />
-    <Folder Include="Data\Services\" />
-  </ItemGroup>
-
 </Project>
