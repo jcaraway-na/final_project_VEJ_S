@@ -11,5 +11,6 @@ namespace Opti_Api_5.Data
 {
     public class AppDbContex
     {
+        public DbSet<CrashModel> Crash { get; set; }
     }
 }
