@@ -12,6 +12,11 @@
     <td align=center>vtg401009</td>
   </tr>
   <tr>
+    <td align=center>Square</td>
+    <td align=center>Triangle</td>
+    <td align=center>Circle</td>
+  </tr>
+  <tr>
     <td width=100>
       <a href="https://github.com/jcaraway-na">
         <img src="https://github.com/jcaraway-na.png?size=100">
