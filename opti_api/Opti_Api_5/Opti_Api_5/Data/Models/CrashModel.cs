@@ -12,6 +12,7 @@ namespace Opti_Api_5.Data.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
         public int crash_id { get; set; }
         public int crash_fatal_fl { get; set; }
         public string crash_date { get; set; }

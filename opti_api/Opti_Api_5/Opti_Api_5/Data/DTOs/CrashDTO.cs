@@ -2,6 +2,7 @@
 {
     public class CrashDTO
     {
+        public int crash_id { get; set; }
         public int crash_fatal_fl { get; set; }
         public string crash_date { get; set; }
         public string crash_time { get; set; }
