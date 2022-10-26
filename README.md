@@ -2,7 +2,7 @@
 
 ## BACKGROUND
 
-> Vision Zero Project
+> If the covid pandemic did not happen, how would traffic incidents compare to current traffic incidents since the pandemic began?
 
 ### Contributors
 <table>
