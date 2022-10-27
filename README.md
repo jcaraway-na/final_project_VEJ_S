@@ -40,10 +40,16 @@
   </tr>
 </table>
 
-<div align=center>Application Design</div>
-<div>
-  <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/app_layout.png?size=50">
-</div>
+<table>
+  <tr>
+    <td align=center><p><strong>Application Design</strong></p></td>
+  </tr>
+  <tr>
+    <td align=center>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/app_layout.png?size=50">
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -58,7 +64,7 @@
 
 ### 1.) ASP.net WebApi Development
 
-<div align=center>Web API Configuration</div>
+<div align=center><strong>Web API Configuration</strong></div>
 <table align=center>
   <tr>
     <td>Complete</td>
