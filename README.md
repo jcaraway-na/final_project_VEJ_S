@@ -95,5 +95,12 @@
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/api_deployed.png" width=100% height=100%>
     </td>
   </tr>
+    <tr>
+    <td> :white_check_mark: </td>
+    <td style="height:10px;"> 4.) Test api calls in swagger environment.</td>
+    <td style="height:10px;">
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/swagger.png" width=100% height=100%>
+    </td>
+  </tr>
 </table
 
