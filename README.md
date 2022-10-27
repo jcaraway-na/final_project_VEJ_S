@@ -56,7 +56,7 @@
 > - Sample data that mimics the expected final database structure or schema
 > - Draft machine learning module is connected to the provisional database
 
-### ASP.net WebApi Development
+### 1.) ASP.net WebApi Development
 
 <div align=center>Web API Configuration</div>
 <table align=center>
@@ -67,8 +67,19 @@
   </tr>
   <tr>
     <td> :white_check_mark: </td>
-    <td style="height:10px;"> 1.) </td>
-    <td style="height:10px;"><img src="https://github.com/jcaraway-na/Map_Earthquakes/blob/main/resources/Addtechplt.png" width=100% height=100%></td>
+    <td style="height:10px;"> 1.) Entity Framework DB connection string is stored inside the appsettings.json file. Connection string is then added as a svervice to the db context using "DefaultConnectionString" from the json file.</td>
+    <td style="height:10px;">
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/ef_connection_string.png" width=100% height=100%>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/add_connection_to_DbContext.png" width=100% height=100%>
+    </td>
+  </tr>
+  <tr>
+    <td> :white_check_mark: </td>
+    <td style="height:10px;"> 2.) Build out Crash model and then push model to DB with EntityFramework Table Migration service.</td>
+    <td style="height:10px;">
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/entity_framework_db_model_migration.png" width=100% height=100%>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/db_table_structure.png" width=100% height=100%>
+    </td>
   </tr>
 </table
 
