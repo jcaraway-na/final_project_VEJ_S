@@ -119,6 +119,7 @@
     <td style="height:10px;"> 5.) Insert or update ETL data to SQL DB for ML python environment.</td>
     <td style="height:10px;">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/get_by_id_post_or_put.png" width=100% height=100%>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/seeded_data.png" width=100% height=100%>
     </td>
   </tr>
 </table
