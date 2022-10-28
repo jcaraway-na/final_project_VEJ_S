@@ -54,17 +54,6 @@
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td align=center><p><strong>Application Design</strong></p></td>
-  </tr>
-  <tr>
-    <td align=center>
-      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/app_layout.png?size=50">
-    </td>
-  </tr>
-</table>
-
 ---
 
 ## Triangle (Elizabeth)
@@ -88,9 +77,20 @@ I used a Random Forest Model on a reduced version of the dataset, with just date
 > - Sample data that mimics the expected final database structure or schema
 > - Draft machine learning module is connected to the provisional database
 
-### 1.) ASP.net WebApi Development
+<table>
+  <tr>
+    <td align=center><p><strong>Application Design</strong></p></td>
+  </tr>
+  <tr>
+    <td align=center>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/app_layout.png?size=50">
+    </td>
+  </tr>
+</table>
 
-<div align=center><strong>Web API Configuration</strong></div>
+### DB Connection
+
+<div align=center><strong>Web API Configuration to our Azure cloud SQL Server</strong></div>
 <table align=center>
   <tr>
     <td>Complete</td>
@@ -121,11 +121,18 @@ I used a Random Forest Model on a reduced version of the dataset, with just date
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/api_deployed.png" width=100% height=100%>
     </td>
   </tr>
-    <tr>
+  <tr>
     <td> :white_check_mark: </td>
     <td style="height:10px;"> 4.) Test api calls in swagger environment.</td>
     <td style="height:10px;">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/swagger.png" width=100% height=100%>
+    </td>
+  </tr>
+  <tr>
+    <td> :white_check_mark: </td>
+    <td style="height:10px;"> 5.) Insert or update ETL data to SQL DB for ML python environment.</td>
+    <td style="height:10px;">
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/get_by_id_post_or_put.png" width=100% height=100%>
     </td>
   </tr>
 </table
