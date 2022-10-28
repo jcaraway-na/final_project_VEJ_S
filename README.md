@@ -142,6 +142,7 @@
       </p>
     </td>
     <td>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/get_raw_vzero_data.png">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/jennings_readme_resources/images/db_connection/etl_process_data.png">
     </td>
   </tr>
