@@ -12,8 +12,6 @@
 >   1) If the covid pandemic did not happen, what would traffic incidents look like through the current date?
 >   2) Since the covid pandemic happened, are commuters more or less safe/better or worse drivers?
 
-
-
 ### Contributors
 <table>
   <tr>
