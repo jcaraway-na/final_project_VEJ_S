@@ -123,6 +123,9 @@
   </tr>
 </table
 
+<div align=center><strong>SEEDING DB COMPLETE HAPPY DANCE!</strong></div>
+<div align=center><img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/webapi_win.gif" width=100% height=100%></div>
+
 ---
 
 ## Triangle (Elizabeth)
