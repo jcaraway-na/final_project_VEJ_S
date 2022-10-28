@@ -2,18 +2,21 @@
 
 ## BACKGROUND
 
-(Vince - Circle)
-
-Selected Topic: If the covid pandemic did not happen, how would traffic incidents compare to current traffic incidents since the pandemic began?
-
-Reason why we selected the topic: We selected this topic to analyze traffic trends throughout the Central Texas area.
-
-Description of the source data: Vision Zero
-
-Questions we hope to answer with the data:
-
-If the covid pandemic did not happen, what would traffic incidents look like through the current date?
-Since the covid pandemic happened, are commuters more or less safe/better or worse drivers?
+## (Vince - Circle)
+>
+> ### Selected Topic: 
+> - If the covid pandemic did not happen, how would traffic incidents compare to current traffic incidents since the pandemic began?
+>
+> ### Reason why we selected the topic: 
+> - We selected this topic to analyze traffic trends throughout the Central Texas area.
+>
+> ### Description of the source data: 
+> - Vision Zero Crash data is obtained from the Texas Department of Transportation (TXDOT) Crash Record Information System (CRIS) database, which is populated by reports submitted by Texas Peace Officers throughout the state, including Austin Police Department (APD), and maintained by TXDOT.
+>
+> ### Questions we hope to answer with the data:
+>
+> - If the covid pandemic did not happen, what would traffic incidents look like through the current date?
+> - Since the covid pandemic happened, are commuters more or less safe/better or worse drivers?
 
 ### Contributors
 <table align=center>
