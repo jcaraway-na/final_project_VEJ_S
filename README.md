@@ -54,19 +54,6 @@
   </tr>
 </table>
 
----
-
-## Triangle (Elizabeth)
-
-#### Note: Updated ETL Processing and Machine Learning Models are in the Elizabeth-Triangle Branch
-
-### ETL Processing
-
-The original "Vision Zero" dataset was quite large and had many duplicative and incomplete fields. In reviewing null values, I first dropped all the geographical data besides longitude, latitude, and point, as all the others had a huge number of null values. I also dropped case ID, which also had many nulls; "contributing factors" which had a lot of nulls and no key for the numerial data; the units involved and associated metadata, and confirmed fatality for being repetitive; and information on what kind of road the accident happened on. I then split the date column into date and time, and transformed it into datetime format. I encoded the columns with "Y / N" or "Y" and blanks to "1 / 0". I then dropped the few remaining rows with null values as over 100,000 complete rows remained.
-
-### Machine Learning Model
-
-I used a Random Forest Model on a reduced version of the dataset, with just date information, population, growth rate, and the total number of serious accidents per month. Accidents were designated as serious if they either had a fatality or serious injury sustained. I trained the Random Forest Model on data from 2012 through 2019; the model scored highly on both testing and training data. However, when feeding in the data from during the initial COVID lockdown (April through September of 2020), the model turned out to be highly inaccurate, predicting a larger number of serious accidents per month than what happened in reality.
 
 ---
 
@@ -93,12 +80,10 @@ I used a Random Forest Model on a reduced version of the dataset, with just date
 <div align=center><strong>Web API Configuration to our Azure cloud SQL Server</strong></div>
 <table align=center>
   <tr>
-    <td>Complete</td>
     <td width="350">Task</td>
     <td>Example</td>
   </tr>
   <tr>
-    <td> :white_check_mark: </td>
     <td style="height:10px;"> 1.) Entity Framework DB connection string is stored inside the appsettings.json file. Connection string is then added as a svervice to the db context using "DefaultConnectionString" from the json file.</td>
     <td style="height:10px;">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/ef_connection_string.png" width=100% height=100%>
@@ -106,7 +91,6 @@ I used a Random Forest Model on a reduced version of the dataset, with just date
     </td>
   </tr>
   <tr>
-    <td> :white_check_mark: </td>
     <td style="height:10px;"> 2.) Build out Crash model and then push model to DB with EntityFramework Table Migration service.</td>
     <td style="height:10px;">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/entity_framework_db_model_migration.png" width=100% height=100%>
@@ -114,7 +98,6 @@ I used a Random Forest Model on a reduced version of the dataset, with just date
     </td>
   </tr>
   <tr>
-    <td> :white_check_mark: </td>
     <td style="height:10px;"> 3.) Build out Crash model RESTful API http controller and deploy asp.net webapi.</td>
     <td style="height:10px;">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/api_controllers.png" width=100% height=100%>
@@ -122,17 +105,60 @@ I used a Random Forest Model on a reduced version of the dataset, with just date
     </td>
   </tr>
   <tr>
-    <td> :white_check_mark: </td>
     <td style="height:10px;"> 4.) Test api calls in swagger environment.</td>
     <td style="height:10px;">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/swagger.png" width=100% height=100%>
     </td>
   </tr>
   <tr>
-    <td> :white_check_mark: </td>
     <td style="height:10px;"> 5.) Insert or update ETL data to SQL DB for ML python environment.</td>
     <td style="height:10px;">
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/get_by_id_post_or_put.png" width=100% height=100%>
     </td>
   </tr>
 </table
+
+---
+
+## Triangle (Elizabeth)
+
+> ### Note: Updated ETL Processing and Machine Learning Models are in the Elizabeth-Triangle Branch
+
+<div align=center><strong>ETL Data Processing</strong></div>
+<table align=center>
+  <tr>
+    <td width="350">Task</td>
+    <td>Example</td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+          The original "Vision Zero" dataset was quite large and had many duplicative and incomplete fields. In reviewing null values, I first dropped all the geographical data besides longitude, latitude, and point, as all the others had a huge number of null values. I also dropped case ID, which also had many nulls; "contributing factors" which had a lot of nulls and no key for the numerial data; the units involved and associated metadata, and confirmed fatality for being repetitive; and information on what kind of road the accident happened on. I then split the date column into date and time, and transformed it into datetime format. I encoded the columns with "Y / N" or "Y" and blanks to "1 / 0". I then dropped the few remaining rows with null values as over 100,000 complete rows remained.
+      </p>
+    </td>
+    <td>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/jennings_readme_resources/images/db_connection/etl_process_data.png">
+    </td>
+  </tr>
+</table>
+
+<div align=center><strong>Machine Learning Model</strong></div>
+<table align=center>
+  <tr>
+    <td width="350">Task</td>
+    <td>Example</td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+          I used a Random Forest Model on a reduced version of the dataset, with just date information, population, growth rate, and the total number of serious accidents per month. Accidents were designated as serious if they either had a fatality or serious injury sustained. I trained the Random Forest Model on data from 2012 through 2019; the model scored highly on both testing and training data. However, when feeding in the data from during the initial COVID lockdown (April through September of 2020), the model turned out to be highly inaccurate, predicting a larger number of serious accidents per month than what happened in reality.
+      </p>
+    </td>
+    <td>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/random_forest_classifier.png">
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/rf_predictions.png">
+    </td>
+  </tr>
+</table>
+
+
