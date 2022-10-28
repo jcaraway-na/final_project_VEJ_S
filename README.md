@@ -72,6 +72,11 @@
     <td align=center>
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/app_layout.png?size=50">
     </td>
+  </tr>f
+  <tr>
+    <td>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/developer_cover.png">
+    </td>
   </tr>
 </table>
 
