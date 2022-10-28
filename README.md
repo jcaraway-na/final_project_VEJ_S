@@ -2,7 +2,17 @@
 
 ## BACKGROUND
 
-> If the covid pandemic did not happen, how would traffic incidents compare to current traffic incidents since the pandemic began?
+> Selected Topic: If the covid pandemic did not happen, how would traffic incidents compare to current traffic incidents since the pandemic began?
+> 
+> Reason why we selected the topic: We selected this topic to analyze traffic trends throughout the Central Texas area.
+> 
+> Description of the source data: Vision Zero
+> 
+> Questions we hope to answer with the data: 
+>   1) If the covid pandemic did not happen, what would traffic incidents look like through the current date?
+>   2) Since the covid pandemic happened, are commuters more or less safe/better or worse drivers?
+
+
 
 ### Contributors
 <table>
