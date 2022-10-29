@@ -4,8 +4,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="static/css/light/light_styles.css">
+
+    <script src="https://unpkg.com/d3@7.6.1/dist/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    
+    <div class="wrapper">
+        <div class="container-fluid">
+            <!-- Start Navbar -->
+            <div id="navbar" style="z-index: 1100;" class="row sticky">
+                <div class="col-sm-1">
+                    <a style="margin-left: 2%; margin-right: 2%;" href="https://nsight-analytics.com/" target="_blank">
+                        <object data="static/images/1024px-Texas_Longhorns_logo.svg.png" width="100" height="40"></object></a>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-1 large-font">
+                    <a style="margin-left: 2%; margin-right: 2%; margin-top: 1%;" href="#">About</a>
+                </div>
+                <div class="col-sm-1 large-font">
+                    <a style="margin-left: 2%; margin-right: 2%; margin-top: 1%;" href="#">Projects</a>
+                </div>
+                <div style="text-align: right;" class="col"></div>
+            </div>
+            <!-- End Navbar -->
+            <div style="height: 70px;" class="row">
+                
+            </div>
+            <div class="row border border-dark">
+                <div id="map" class="col map-panels"></div>
+                <div class="col-sm-4 map-panels">test</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+    <script type="module" src="static/js/app.js"></script>
+    <script type="module" src="static/js/map.js"></script>
 </body>
 </html>
