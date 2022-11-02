@@ -131,8 +131,6 @@
 
 ## Triangle (Elizabeth)
 
-> ### Note: Updated ETL Processing and Machine Learning Models are in the Elizabeth-Triangle Branch
-
 <div align=center><strong>ETL Data Processing</strong></div>
 <table align=center>
   <tr>
