@@ -9,8 +9,8 @@ using Opti_Api_5.Data;
 namespace Opti_Api_5.Migrations
 {
     [DbContext(typeof(AppDbContex))]
-    [Migration("20221023234357_updateTableId")]
-    partial class updateTableId
+    [Migration("20221031030556_updateRealTimeTable")]
+    partial class updateRealTimeTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,6 +126,42 @@ namespace Opti_Api_5.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Crash");
+                });
+
+            modelBuilder.Entity("Opti_Api_5.Data.Models.RealTimeTrafficModel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("issue_reported")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("longitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("published_date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("traffic_report_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("traffic_report_status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("traffic_report_status_date_time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Traffic");
                 });
 #pragma warning restore 612, 618
         }

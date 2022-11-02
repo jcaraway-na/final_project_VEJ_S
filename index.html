@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <link rel="stylesheet" href="static/css/light/light_styles.css">
+    <link rel="stylesheet" href="static/css/fonts.css">
+    <link rel="stylesheet" href="static/css/tables.css">
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 
-    <script src="https://unpkg.com/d3@7.6.1/dist/d3.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -23,7 +26,7 @@
                     <a style="margin-left: 2%; margin-right: 2%;" href="https://nsight-analytics.com/" target="_blank">
                         <object data="static/images/1024px-Texas_Longhorns_logo.svg.png" width="100" height="40"></object></a>
                 </div>
-                <div class="col-sm-1"></div>
+                <div class="col-sm-0.5"></div>
                 <div class="col-sm-1 large-font">
                     <a style="margin-left: 2%; margin-right: 2%; margin-top: 1%;" href="#">About</a>
                 </div>
@@ -36,19 +39,119 @@
             <div style="height: 70px;" class="row">
                 
             </div>
-            <div class="row border border-dark">
+            <div class="row">
+                <div style="overflow-y: scroll;" class="col-sm-2.5 map-panels">
+                    <table class="table table-condensed">
+                        <thead>
+                            <th>Color</th>
+                            <th>Description</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="background-color: rgba(255, 255, 0, 0.5); width: 50;"></td>
+                                <td>Crash Service-Traffic Hazard</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(255, 162, 0, 0.5); width: 50;"></td>
+                                <td>Traffic Hazard-CrashUrgent</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(161, 11, 11, 0.5); width: 50;"></td>
+                                <td>Crash Urgent-VEHICLE FIRE</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(255, 0, 239, 0.5); width: 50;"></td>
+                                <td>VEHICLE FIRE-COLLISION WITH INJURY</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(255, 128, 0, 0.5); width: 50;"></td>
+                                <td>COLLISION WITH INJURY-COLLISN/LVNG SCN</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(0, 0, 255, 0.5); width: 50;"></td>
+                                <td>COLLISN/LVNG SCN-FLEET ACC/INJURY</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(0, 255, 0, 0.5); width: 50;"></td>
+                                <td>FLEET ACC/INJURY-TRAFFIC FATALITY</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(255, 0, 0, 0.5); width: 50;"></td>
+                                <td>TRAFFIC FATALITY-AUTO/PED</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(230, 0, 255, 0.5); width: 50;"></td>
+                                <td>AUTO/PED-COLLISN/FTSRA</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(9, 255, 0, 0.5); width: 50;"></td>
+                                <td>COLLISN/FTSRA-FLEET ACC/FATAL</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(255, 0, 213, 0.5); width: 50;"></td>
+                                <td>FLEET ACC/FATAL+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div id="map" class="col map-panels"></div>
-                <div class="col-sm-4 map-panels">test</div>
+                <div id="pdata" class="col-sm-4 map-panels">
+                </div>
+            </div>
+            <div class="row">
+                <div id="incidentcounts" class="col panels"></div>
+                <div id="dayofweek" class="col panels"></div>
+                <div class="col-sm-4  panels">
+                    <caption style="caption-side:top;">
+                        <p style="text-align: center;" class="large-font">Query Traffic Data</p>
+                    </caption>
+                <!-- data filter starts here -->
+                <form class="">
+                    <p>Select a start date and end date range.</p>
+                    <ul class="list-group">
+                        <!-- Filter 1-->
+                          <li class="list-group" class="btn-light">
+                            <label for="startdate">Enter Start Date</label>
+                            <input id="startdate" type="date" placeholder="(e.g.) 1/10/2010" id="datetime" />
+                        </li>
+                        <!-- Filter 2-->
+                        <li class="list-group" class="btn-light">
+                            <label for="enddate">Enter End Date</label>
+                            <input id="enddate" type="date" placeholder="(e.g.) 1/11/2010" id="datetime" />
+                        </li>
+                        <div style="height: 20;"></div>
+                     <button id="filter-btn" type="button" class="rounded btn btn-secondary btn btn-default">Filter Data</button>
+                    </ul>
+                  </form>
+                </div>
+            </div>
+            <div class="row">
+                <div id="rollingsumissues" class="col panels"></div>
+            </div>
+            <div class="row">
+                <div style="overflow: scroll;" class="col map-panels">
+                    <table  class="table table-condensed">
+                        <thead>
+                          <tr>
+                            <th>Issue Reported</th>
+                            <th>Published Date</th>
+                            <th>Status</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th>Address</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
     <script type="module" src="static/js/app.js"></script>
     <script type="module" src="static/js/map.js"></script>
+    <script type="module" src="static/js/global-charts.js"></script>
 </body>
 </html>
