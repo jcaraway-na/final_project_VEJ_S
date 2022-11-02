@@ -2,11 +2,9 @@
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score
 
 # Import data
 v0_df = pd.read_csv('/Users/elizabethhalprin/Documents/bootcamp/Final_Project/final_project_VEJ_S/python_etl_processing/v0_df.csv')
@@ -20,6 +18,7 @@ v0_df['month'] = pd.DatetimeIndex(v0_df['crash_date']).month
 v0_df['day'] = pd.DatetimeIndex(v0_df['crash_date']).day
 v0_df['crash_time'] = pd.to_datetime(v0_df['crash_time'])
 v0_df['hour'] = pd.DatetimeIndex(v0_df['crash_time']).hour
+v0_df['dayofweek'] = pd.to_datetime(v0_df['crash_date']).apply(lambda x: x.weekday())
 
 # Import population csv
 pop_df = pd.read_csv('/Users/elizabethhalprin/Documents/bootcamp/Final_Project/final_project_VEJ_S/python_etl_processing/austin_pop.csv')
@@ -144,3 +143,37 @@ def predict_pedestrians(start_year, end_year, start_month, end_month):
 
 # Look at April-Sep 2020
 predict_pedestrians(2020, 2021, 4, 9)
+
+# Look at number of accidents by time of day, pre-covid
+precovid_hours = merged_df[(merged_df['year'].between(2012,2020,inclusive='neither'))]
+precovid_hours = precovid_hours[['hour', 'crash_id']].groupby('hour', as_index=False).count()
+precovid_hours = precovid_hours.rename(columns={'crash_id': 'total_crashes'})
+precovid_hours['average_crashes'] = precovid_hours['total_crashes'] / (365*7)
+
+# Look at number of accidents by time of day, during covid
+covid_hours = merged_df[(merged_df['year'] == 2020) & (merged_df['month'].between(4,9, inclusive='both'))]
+covid_hours = covid_hours[['hour', 'crash_id']].groupby('hour', as_index=False).count()
+covid_hours = covid_hours.rename(columns={'crash_id': 'total_crashes'})
+covid_hours['average_crashes'] = covid_hours['total_crashes'] / (365/2)
+
+# Compare time of day by era
+hours_comparison = pd.DataFrame({'Hour': precovid_hours['hour'], 'PreCovid_Accidents_Per_Day': precovid_hours['average_crashes'], 'Covid_Accidents_Per_Day': covid_hours['average_crashes']})
+hours_comparison.plot(x='Hour', y=['PreCovid_Accidents_Per_Day', 'Covid_Accidents_Per_Day'], title="Average Number of Accidents by Time of Day")
+
+# Look at number of accidents by day of week, pre-covid
+precovid_dayofweek = merged_df[merged_df['year'].between(2012, 2020, inclusive='neither')]
+precovid_dayofweek = precovid_dayofweek[['crash_id', 'dayofweek']].groupby('dayofweek').count()
+precovid_dayofweek = precovid_dayofweek.rename(columns={'crash_id': 'total_crashes'})
+precovid_dayofweek['average_crashes'] = precovid_dayofweek['total_crashes'] / 365
+
+# Look at number of accidents by day of week, covid
+covid_dayofweek = merged_df[(merged_df['year'] == 2020) & (merged_df['month'].between(4,10, inclusive='both'))]
+covid_dayofweek = covid_dayofweek[['crash_id', 'dayofweek']].groupby('dayofweek').count()
+covid_dayofweek = covid_dayofweek.rename(columns={'crash_id': 'total_crashes'})
+covid_dayofweek['average_crashes'] = covid_dayofweek['total_crashes'] / 30.5
+
+# Compare day of week by era
+dayofweek_labels = ['Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat', 'Sun']
+compare_dayofweek_df = pd.DataFrame({'dayofweek': dayofweek_labels, 'precovid_average_crashes': precovid_dayofweek['average_crashes'],
+                                    'covid_average_crashes': covid_dayofweek['average_crashes']})
+compare_dayofweek_df.plot(x='dayofweek', y=['precovid_average_crashes', 'covid_average_crashes'], title="Crashes by Day, Pre and During COVID")
