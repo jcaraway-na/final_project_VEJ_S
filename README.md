@@ -72,10 +72,20 @@
     <td align=center>
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/app_layout.png?size=50">
     </td>
-  </tr>f
+  </tr>
   <tr>
     <td>
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/developer_cover.png">
+    </td>
+  </tr>
+    <tr>
+    <td align=center>
+      <strong>Frontend Progress</strong>
+    </td>
+  </tr>
+    <tr>
+    <td align=center>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/frontend/frontend_realtime_dashboard.png">
     </td>
   </tr>
 </table>
