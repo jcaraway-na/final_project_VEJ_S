@@ -68,7 +68,7 @@ def post_request(payload):
     return r
 
 def put_request(id, payload):
-    r = request.post(url = f'{base_url}{put_uri}/{id}', json=payload)
+    r = request.put(url = f'{base_url}{put_uri}/{id}', json=payload)
 
     return r
 
@@ -95,11 +95,11 @@ def get_post_put_request(dataframe):
                     print(f'End point is forbidden: Status code {response.status_code}.')
             else:
                 response = put_request(id,payload)
-                print(f'PUT status code: {response.status_code}.')
+                print(f'PUT status code: update row {index} record {id} {response.status_code}.')
 
 
 async def get_raw_data():
-    v0_df=pd.DataFrame.from_records(await api_calls.get_v0_data())
+    v0_df=pd.DataFrame.from_records(await get_v0_data())
 
     # Drop unnecessary columns
     v0_df = v0_df.drop(columns=['case_id', 'rpt_latitude', 'rpt_longitude', 'rpt_block_num', 'rpt_street_pfx', 'rpt_street_name',

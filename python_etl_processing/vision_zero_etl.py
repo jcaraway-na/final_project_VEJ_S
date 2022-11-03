@@ -61,11 +61,10 @@ def put_request(id, payload):
 
 def get_post_put_request(dataframe):
     dataframe['crash_date'] = dataframe['crash_date'].astype(str)
-
+    
     for index, row in dataframe.iterrows():
 
         crash_id = row['crash_id']
-
 
         # build out payload
         payload = {'crash_id': row['crash_id'],'crash_fatal_fl': row['crash_fatal_fl'], 'crash_date': row['crash_date'], 'crash_time': row['crash_time'], 'crash_speed_limit': row['crash_speed_limit'], 'road_constr_zone_fl': row['road_constr_zone_fl'], 'latitude': row['latitude'], 'longitude': row['longitude'],
@@ -76,6 +75,8 @@ def get_post_put_request(dataframe):
 
         # get crash id from db
         response = get_crash_by_id(crash_id)
+    
+        test = response.json();
 
         # if crash id != exist then post payload. else put payload
         if response.status_code == 204:
@@ -88,7 +89,7 @@ def get_post_put_request(dataframe):
                 print(f'End point is forbidden: Status code {response.status_code}.')
         else:
             response = put_request(crash_id,payload)
-            print(f'PUT status code: update {crash_id} {response.status_code}.')
+            print(f'PUT status code: update row {index} record {crash_id} {response.status_code}.')
 
 
 

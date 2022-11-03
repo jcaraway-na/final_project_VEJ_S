@@ -45,7 +45,7 @@ export async function spGetTrafficIssues(startDate,endDate){
     })
     const data = await response.json();
 
-    console.log(data)
+    return data
 }
 
 export async function spGetDayOfWeek(){
@@ -55,7 +55,7 @@ export async function spGetDayOfWeek(){
     })
     const data = await response.json();
 
-    console.log(data)
+    return data
 }
 
 export async function spIncidentSeverity(startDate,endDate){

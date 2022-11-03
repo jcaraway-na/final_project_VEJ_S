@@ -48,48 +48,56 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="background-color: rgba(255, 255, 0, 0.5); width: 50;"></td>
-                                <td>Crash Service-Traffic Hazard</td>
+                                <td style="background-color: rgba(214, 100, 119,0.5); width: 50;"></td>
+                                <td>AUTO/ PED</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(255, 162, 0, 0.5); width: 50;"></td>
-                                <td>Traffic Hazard-CrashUrgent</td>
+                                <td style="background-color: rgba(231, 146, 112,0.5); width: 50;"></td>
+                                <td>BLOCKED DRIV/ HWY</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(161, 11, 11, 0.5); width: 50;"></td>
-                                <td>Crash Urgent-VEHICLE FIRE</td>
+                                <td style="background-color: rgba(227, 192, 130,0.5); width: 50;"></td>
+                                <td>COLLISION</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(255, 0, 239, 0.5); width: 50;"></td>
-                                <td>VEHICLE FIRE-COLLISION WITH INJURY</td>
+                                <td style="background-color: rgba(31, 138, 110,0.5); width: 50;"></td>
+                                <td>COLLISION WITH INJURY</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(255, 128, 0, 0.5); width: 50;"></td>
-                                <td>COLLISION WITH INJURY-COLLISN/LVNG SCN</td>
+                                <td style="background-color: rgb(11, 51, 116,0.5); width: 50;"></td>
+                                <td>COLLISION/PRIVATE PROPERTY</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(0, 0, 255, 0.5); width: 50;"></td>
-                                <td>COLLISN/LVNG SCN-FLEET ACC/INJURY</td>
+                                <td style="background-color: rgba(152, 107, 188,0.5); width: 50;"></td>
+                                <td>COLLISN/ LVNG SCN</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(0, 255, 0, 0.5); width: 50;"></td>
-                                <td>FLEET ACC/INJURY-TRAFFIC FATALITY</td>
+                                <td style="background-color: rgba(2, 102, 3,0.5); width: 50;"></td>
+                                <td>Crash Service</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(255, 0, 0, 0.5); width: 50;"></td>
-                                <td>TRAFFIC FATALITY-AUTO/PED</td>
+                                <td style="background-color: rgba(141, 47, 181,0.5); width: 50;"></td>
+                                <td>Crash Urgent</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(230, 0, 255, 0.5); width: 50;"></td>
-                                <td>AUTO/PED-COLLISN/FTSRA</td>
+                                <td style="background-color: rgba(173, 114, 83,0.5); width: 50;"></td>
+                                <td>LOOSE LIVESTOCK</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(9, 255, 0, 0.5); width: 50;"></td>
-                                <td>COLLISN/FTSRA-FLEET ACC/FATAL</td>
+                                <td style="background-color: rgba(255, 181, 10,0.5); width: 50;"></td>
+                                <td>Stalled Vehicle</td>
                             </tr>
                             <tr>
-                                <td style="background-color: rgba(255, 0, 213, 0.5); width: 50;"></td>
-                                <td>FLEET ACC/FATAL+</td>
+                                <td style="background-color: rgba(92, 104, 68,0.5); width: 50;"></td>
+                                <td>Traffic Hazard</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(79, 71, 60,0.5); width: 50;"></td>
+                                <td>TRFC HAZD/ DEBRIS</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgba(156, 17, 73,0.5); width: 50;"></td>
+                                <td>VEHICLE FIRE</td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,7 +107,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="incidentcounts" class="col panels"></div>
+                <div id="incidentseverity" class="col panels"></div>
                 <div id="dayofweek" class="col panels"></div>
                 <div class="col-sm-4  panels">
                     <caption style="caption-side:top;">
@@ -130,7 +138,7 @@
             </div>
             <div class="row">
                 <div style="overflow: scroll;" class="col map-panels">
-                    <table  class="table table-condensed">
+                    <table id="incidenttable"   class="table table-condensed">
                         <thead>
                           <tr>
                             <th>Issue Reported</th>
@@ -141,7 +149,7 @@
                             <th>Address</th>
                           </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody id="mytablebody"></tbody>
                       </table>
                 </div>
             </div>

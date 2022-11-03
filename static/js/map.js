@@ -1,5 +1,6 @@
 import { get_yesterdays_data,spGetHistoricalTrafficData} from '../js/api_calls.js';
 import { makePlotly,addToPlotly} from '../js/global-charts.js';
+import { trafficIncidentColor} from '../js/colors.js';
 let crashes = [];
 var marker;
 
@@ -56,42 +57,7 @@ crashes = await get_yesterdays_data(`${yesterday}`,`${today}`);
 console.log(crashes);
 
 function getColor(crashType) {
-	if (crashType === 'Crash Service') {
-		return "rgba(255, 255, 0, 0.5)";
-	}
-	if (crashType === 'Traffic Hazard') {
-		return "rgba(255, 162, 0, 0.5)";
-	}
-	if (crashType === 'Crash Urgent') {
-		return "rgba(161, 11, 11, 0.5)";
-	}
-	if (crashType === 'VEHICLE FIRE') {
-		return "rgba(255, 0, 239, 0.5)";
-	}
-	if (crashType === 'COLLISION WITH INJURY') {
-		return "rgba(255, 128, 0, 0.5)";
-	}
-	if (crashType === 'COLLISN/ LVNG SCN') {
-		return "rgba(0, 0, 255, 0.5)";
-	}
-	if (crashType === 'FLEET ACC/ INJURY') {
-		return "rgba(0, 255, 0, 0.5)";
-	}
-	if (crashType === 'TRAFFIC FATALITY') {
-		return "rgba(255, 0, 0, 0.5)";
-	}
-	if (crashType === 'AUTO/ PED') {
-		return "rgba(230, 0, 255, 0.5)";
-	}
-	if (crashType === 'COLLISN / FTSRA') {
-		return "rgba(9, 255, 0, 0.5)";
-	}
-	if (crashType === 'FLEET ACC/ FATAL') {
-		return "rgba(255, 0, 213, 0.5)";
-	}
-	else {
-		return "rgba(0, 0, 0, 0.5)";
-	}
+	return trafficIncidentColor(crashType);
 }
 
 let legend = L.control({
@@ -99,34 +65,7 @@ let legend = L.control({
 
 });
 
-// Then add all the details for the legend
-legend.onAdd = function () {
-	let div = L.DomUtil.create("div", "info legend");
 
-	const incidents = ['Crash Service', 'Traffic Hazard', 'Crash Urgent', 'VEHICLE FIRE', 'COLLISION WITH INJURY', 'COLLISN/ LVNG SCN',
-		'FLEET ACC/ INJURY', 'TRAFFIC FATALITY', 'AUTO/ PED', 'COLLISN / FTSRA', 'FLEET ACC/ FATAL'];
-	const colors = [
-		"rgba(255, 255, 0, 0.5)",
-		"rgba(255, 162, 0, 0.5)",
-		"rgba(161, 11, 11, 0.5)",
-		"rgba(255, 0, 239, 0.5)",
-		"rgba(255, 128, 0, 0.5)",
-		"rgba(0, 0, 255, 0.5)",
-		"rgba(0, 255, 0, 0.5)",
-		"rgba(255, 0, 0, 0.5)",
-		"rgba(230, 0, 255, 0.5)",
-		"rgba(9, 255, 0, 0.5)",
-		"rgba(255, 0, 213, 0.5)"
-	];
-
-	for (var i = 0; i < incidents.length; i++) {
-		console.log(colors[i]);
-		div.innerHTML +=
-			"<i style='background: " + colors[i] + "'></i> " +
-			incidents[i] + (incidents[i + 1] ? "&ndash;" + incidents[i + 1] + "<br>" : "+");
-	}
-	return div;
-};
 // legend.addTo(map);
 
 for (var i in crashes) {
@@ -144,60 +83,60 @@ for (var i in crashes) {
 };
 
 var data;
-async function yesterdayIncidentsPlot(data){
-	var x=[], y=[];
-	var row
+// async function yesterdayIncidentsPlot(data){
+// 	var x=[], y=[];
+// 	var row
 
-	for(var i = 0; i<data.length;i++){
-		row=data[i];
-		x.push(row['historical_issue_count']);
-		y.push(row['issue_reported']);
-	}
+// 	for(var i = 0; i<data.length;i++){
+// 		row=data[i];
+// 		x.push(row['historical_issue_count']);
+// 		y.push(row['issue_reported']);
+// 	}
 
-	let trace = [];
+// 	let trace = [];
 
-	trace = [{
-        x: x,
-        y: y,
-        type: 'bar',
-		orientation: 'h',
-        marker: {
-            color: 'rgba(135, 61, 255, .8',
-            size: 8
-        }
-    }];
+// 	trace = [{
+//         x: x,
+//         y: y,
+//         type: 'bar',
+// 		orientation: 'h',
+//         marker: {
+//             color: 'rgba(135, 61, 255, .8',
+//             size: 8
+//         }
+//     }];
 
-	var layout = {
-		xaxis: {
-			title: 'Incident Count',
-			gridcolor: 'rgba(0,0,0,.2)'
-		},
-		yaxis: {
-			gridcolor: 'rgba(0,0,0,.2)',
-		},
+// 	var layout = {
+// 		xaxis: {
+// 			title: 'Incident Count',
+// 			gridcolor: 'rgba(0,0,0,.2)'
+// 		},
+// 		yaxis: {
+// 			gridcolor: 'rgba(0,0,0,.2)',
+// 		},
 
-		showlegend: true,
-		legend: {
-			x: 1,
-			xanchor: 'right',
-			y: 1
-		},
-		paper_bgcolor: 'rgba(0,0,0,0)',
-		plot_bgcolor: 'rgba(0,0,0,0)',
-		height: 600,
-		margin: {
-			l: 200,
-			r: 55,
-			b: 100,
-			t: 50,
-			pad: 4
+// 		showlegend: true,
+// 		legend: {
+// 			x: 1,
+// 			xanchor: 'right',
+// 			y: 1
+// 		},
+// 		paper_bgcolor: 'rgba(0,0,0,0)',
+// 		plot_bgcolor: 'rgba(0,0,0,0)',
+// 		height: 600,
+// 		margin: {
+// 			l: 200,
+// 			r: 55,
+// 			b: 100,
+// 			t: 50,
+// 			pad: 4
 
-		},
+// 		},
 
-	}
-	var config = { responsive: true };
-    Plotly.newPlot('pdata', trace, layout, config);
-}
+// 	}
+// 	var config = { responsive: true };
+//     Plotly.newPlot('pdata', trace, layout, config);
+// }
 
 function formatDate(date){
     // Create a date object from a date string
@@ -213,5 +152,5 @@ function formatDate(date){
     return formattedDate;
 }
 
-var data = await spGetHistoricalTrafficData(formatDate(getPreviousDay()),formatDate(new Date()));
-await yesterdayIncidentsPlot(data)
+// var data = await spGetHistoricalTrafficData(formatDate(getPreviousDay()),formatDate(new Date()));
+// await yesterdayIncidentsPlot(data)
