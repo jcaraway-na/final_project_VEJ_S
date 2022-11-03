@@ -21,9 +21,9 @@
 ### Contributors
 <table align=center>
   <tr>
-    <td align=center>Router</td>
-    <td align=center>ehalprin</td>
-    <td align=center>vtg401009</td>
+    <td align=center>Jennings</td>
+    <td align=center>Elizabeth</td>
+    <td align=center>Vince</td>
   </tr>
   <tr>
     <td align=center>Square & X</td>
