@@ -37,7 +37,7 @@ year_df = year_df.groupby('year').sum()
 year_df = year_df.merge(pop_df, left_on="year", right_on="Year", how="left")
 
 # Plot the dataframe of total serious accidents per month
-plot_srs.plot()
+plot_srs.plot(color='rebeccapurple', title='Serious Accidents Per Month')
 
 # Get precovid data on serious accidents to train model - drop 2012 because it's not a complete month of data
 pcsrs_df = merged_df[(merged_df['year'] < 2020) & (merged_df['year'] > 2012)]
@@ -84,7 +84,7 @@ def predict_srs(start_year, end_year, start_month, end_month):
     accidents_avoided = results_df['Accidents_Avoided'].sum()
     print(f'Accidents Avoided: {accidents_avoided}')
     print(results_df)
-    results_df.plot.line(x='Month', y=['Prediction', 'Actual'], alpha=0.75, rot=45)
+    results_df.plot.line(x='Month', y=['Prediction', 'Actual'], alpha=0.75, rot=45, color=['rebeccapurple', 'salmon'], title='Predicted Serious Accidents, Compared to Actual')
 
 # Look at April-Sep 2020
 predict_srs(2020, 2021, 4, 9)
@@ -92,7 +92,7 @@ predict_srs(2020, 2021, 4, 9)
 # Plot number of accidents involving pedestrians over time
 plot_pedestrians = merged_df[['year_month', 'pedestrian_fl']]
 plot_pedestrians = plot_pedestrians.groupby('year_month').sum()
-plot_pedestrians.plot()
+plot_pedestrians.plot(color='mediumpurple')
 
 # Get precovid pedestrian data to train model
 pcpd_df = merged_df[(merged_df['year'] < 2020) & (merged_df['year'] > 2012)]
@@ -139,7 +139,7 @@ def predict_pedestrians(start_year, end_year, start_month, end_month):
     accidents_avoided = results_df['Accidents Avoided'].sum()
     print(f"Accidents Avoided: {accidents_avoided}")
     print(results_df)
-    results_df.plot.line(x="Month", y=["Prediction", "Actual"], alpha=0.75, rot=45, title="Predicted Accidents Involving Pedestrians, Compared to Actual")
+    results_df.plot.line(x="Month", y=["Prediction", "Actual"], alpha=0.75, rot=45, color=['rebeccapurple', 'salmon'], title="Predicted Accidents Involving Pedestrians, Compared to Actual")
 
 # Look at April-Sep 2020
 predict_pedestrians(2020, 2021, 4, 9)
@@ -158,7 +158,7 @@ covid_hours['average_crashes'] = covid_hours['total_crashes'] / (365/2)
 
 # Compare time of day by era
 hours_comparison = pd.DataFrame({'Hour': precovid_hours['hour'], 'PreCovid_Accidents_Per_Day': precovid_hours['average_crashes'], 'Covid_Accidents_Per_Day': covid_hours['average_crashes']})
-hours_comparison.plot(x='Hour', y=['PreCovid_Accidents_Per_Day', 'Covid_Accidents_Per_Day'], title="Average Number of Accidents by Time of Day")
+hours_comparison.plot(x='Hour', y=['PreCovid_Accidents_Per_Day', 'Covid_Accidents_Per_Day'], title="Average Number of Accidents by Time of Day", color=['mediumpurple', 'salmon'])
 
 # Look at number of accidents by day of week, pre-covid
 precovid_dayofweek = merged_df[merged_df['year'].between(2012, 2020, inclusive='neither')]
@@ -176,4 +176,24 @@ covid_dayofweek['average_crashes'] = covid_dayofweek['total_crashes'] / 30.5
 dayofweek_labels = ['Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat', 'Sun']
 compare_dayofweek_df = pd.DataFrame({'dayofweek': dayofweek_labels, 'precovid_average_crashes': precovid_dayofweek['average_crashes'],
                                     'covid_average_crashes': covid_dayofweek['average_crashes']})
-compare_dayofweek_df.plot(x='dayofweek', y=['precovid_average_crashes', 'covid_average_crashes'], title="Crashes by Day, Pre and During COVID")
+compare_dayofweek_df.plot(x='dayofweek', y=['precovid_average_crashes', 'covid_average_crashes'], title="Crashes by Day, Pre and During COVID", color=['mediumpurple', 'salmon'])
+
+# Look at number of accidents by month, pre-covid
+precovid_months = merged_df[(merged_df['year'].between(2012,2020,inclusive='neither'))]
+precovid_months = precovid_months[['month', 'crash_id']].groupby('month', as_index=False).count()
+precovid_months = precovid_months.rename(columns={'crash_id': 'precovid_crashes'})
+precovid_months['average_precovid'] = precovid_months['precovid_crashes'] / (7)
+
+# Look at number of accidents by month, during covid
+months_2020 = merged_df[merged_df['year'] == 2020]
+months_2020 = months_2020[['month', 'crash_id']].groupby('month', as_index=False).count()
+months_2020 = months_2020.rename(columns={'crash_id': 'crashes_2020'})
+
+# Look at number of accidents by month, 2021
+months_2021 = merged_df[merged_df['year'] == 2021]
+months_2021 = months_2021[['month', 'crash_id']].groupby('month', as_index=False).count()
+months_2021 = months_2021.rename(columns={'crash_id': 'crashes_2021'})
+
+# Compare months by era
+months_comparison = pd.DataFrame({'Month': precovid_months['month'], 'PreCovid_Crashes_Per_Month': precovid_months['average_precovid'], 'Crashes_2020': months_2020['crashes_2020'], 'Crashes_2021': months_2021['crashes_2021']})
+months_comparison.plot(x='Month', y=['PreCovid_Crashes_Per_Month', 'Crashes_2020', 'Crashes_2021'], title="Average Number of Crashes by Month", color=['rebeccapurple', 'mediumpurple', 'salmon'])
