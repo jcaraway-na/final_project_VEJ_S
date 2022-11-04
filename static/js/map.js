@@ -65,7 +65,6 @@ let legend = L.control({
 
 });
 
-
 // legend.addTo(map);
 
 for (var i in crashes) {

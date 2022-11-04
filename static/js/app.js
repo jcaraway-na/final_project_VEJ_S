@@ -1,33 +1,38 @@
-import { get_yesterdays_data,spGetHistoricalTrafficData, spRollingSumByIssue, spGetTrafficIssues, spGetDayOfWeek, spIncidentSeverity } from '../js/api_calls.js';
+import { get_yesterdays_data, spGetHistoricalTrafficData, spRollingSumByIssue, spGetTrafficIssues, spGetDayOfWeek, spIncidentSeverity } from '../js/api_calls.js';
 import { trafficIncidentColor } from '../js/colors.js';
 
 var endDate = formatDate(new Date());
 var startDate = formatDate(getPreviousDay());
+var colNames = ['auto_ped', 'blocked_driv_hwy', 'collision', 'collision_private_property', 'collision_with_injury', 'collisn_lvng_scn',
+'crash_service', 'crash_urgent', 'loose_livestock', 'stalled_vehicle', 'traffic_hazard', 'trfc_hazd_debris', 'vehicle_fire'];
 
 async function init(startDate, endDate) {
 
     // Historical issue count chart to right of the map
-    var data = await spGetHistoricalTrafficData(formatDate(getPreviousDay()),formatDate(new Date()));
+    var data = await spGetHistoricalTrafficData(formatDate(getPreviousDay()), formatDate(new Date()));
     await yesterdayIncidentsPlot(data, 'pdata', 'historical_issue_count', 'issue_reported', 'bar', 'h');
 
     // Day of Week chart
-    var data = await spGetDayOfWeek();
+    var data = await spGetDayOfWeek(formatDate(getPreviousDay()), formatDate(new Date()));
     await yesterdayIncidentsPlot(data, 'dayofweek', 'day_of_week', 'issue_count', 'bar', 'v');
 
     // Rolling Sum by Issue
-    var data = await spRollingSumByIssue(formatDate(getPreviousDay()),formatDate(new Date()));
+    var data = await spRollingSumByIssue(formatDate(getPreviousDay()), formatDate(new Date()));
     await yesterdayIncidentsPlot(data, 'rollingsumissues', 'published_date', 'crash_service', 'line', 'v');
+    for (var i = 0; i < colNames.length; i++){
+        await addIncidentsToPlot(data, 'rollingsumissues','published_date',colNames[i], 'line', 'v');
+    }
 
     // Incident Severity
-    var data = await spIncidentSeverity(formatDate(getPreviousDay()),formatDate(new Date()));
-    await yesterdayIncidentsPlot(data, 'incidentseverity', 'crash_date', 'avg_crash_sev', 'line', 'v');
+    // var data = await spIncidentSeverity(formatDate(getPreviousDay()),formatDate(new Date()));
+    // await yesterdayIncidentsPlot(data, 'incidentseverity', 'crash_date', 'avg_crash_sev', 'line', 'v');
 
-    await loadIncidentTable(formatDate(getPreviousDay()),formatDate(new Date()));
+    await loadIncidentTable(formatDate(getPreviousDay()), formatDate(new Date()));
 }
 
 function getPreviousDay(date = new Date()) {
     const previous = new Date(date.getTime());
-    previous.setDate(date.getDate() - 1);
+    previous.setDate(date.getDate() - 6);
 
     return previous;
 }
@@ -47,28 +52,53 @@ function formatDate(date) {
 }
 
 async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientation) {
-    var x = [], y = [], c=[];
-    var row
-
-    for (var i = 0; i < data.length; i++) {
-        row = data[i];
-        x.push(row[xlabel]);
-        y.push(row[ylabel]);
-        c.push(trafficIncidentColor(row[ylabel]));
-    }
-
+    var x = [], y = [], c = [];
+    var row;
     let trace = [];
 
-    trace = [{
-        x: x,
-        y: y,
-        type: type,
-        orientation: `${orientation}`,
-        marker: {
-            color: c,
-            size: 8
+    if (div === 'rollingsumissues') {
+        for (var i = 0; i < data.length; i++) {
+            row = data[i];
+            x.push(row[xlabel]);
+            y.push(row[ylabel]);
         }
-    }];
+
+        trace = [{
+            x: x,
+            y: y,
+            type: type,
+            name: ylabel,
+            orientation: `${orientation}`,
+            marker: {
+                color: trafficIncidentColor(ylabel),
+                size: 8
+            }
+        }];
+    }
+    else {
+        for (var i = 0; i < data.length; i++) {
+            row = data[i];
+            x.push(row[xlabel]);
+            y.push(row[ylabel]);
+            c.push(trafficIncidentColor(row[ylabel]));
+        }
+
+        trace = [{
+            x: x,
+            y: y,
+            type: type,
+            orientation: `${orientation}`,
+            marker: {
+                color: c,
+                size: 8
+            }
+        }];
+    }
+
+
+
+
+
 
     if (div === 'pdata') {
         var layout = {
@@ -98,7 +128,7 @@ async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientati
             },
         }
     }
-    else if(div === 'dayofweek'){
+    else if (div === 'dayofweek') {
         var layout = {
             xaxis: {
                 title: xlabel,
@@ -128,7 +158,7 @@ async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientati
             },
         }
     }
-    else if(div === 'rollingsumissues'){
+    else if (div === 'rollingsumissues') {
         var layout = {
             xaxis: {
                 title: xlabel,
@@ -142,12 +172,12 @@ async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientati
             showlegend: true,
             legend: {
                 x: 1,
-                xanchor: 'right',
+                xanchor: 'bottom',
                 y: 1
             },
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
-            height: 300,
+            height: 450,
             margin: {
                 l: 50,
                 r: 55,
@@ -157,7 +187,7 @@ async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientati
             },
         }
     }
-    else if(div === 'incidentseverity'){
+    else if (div === 'incidentseverity') {
         var layout = {
             xaxis: {
                 title: xlabel,
@@ -187,9 +217,58 @@ async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientati
         }
     }
     var config = { responsive: true };
-    Plotly.newPlot(div,trace, layout, config);
+    Plotly.newPlot(div, trace, layout, config);
 }
 
+async function addIncidentsToPlot(data, div, xlabel, ylabel, type, orientation) {
+
+    console.log(data);
+    var x = [], y = [], c = [];
+    var row;
+    let trace = [];
+
+    if (div === 'rollingsumissues') {
+        for (var i = 0; i < data.length; i++) {
+            row = data[i];
+            x.push(row[xlabel]);
+            y.push(row[ylabel]);
+        }
+
+        trace = [{
+            x: x,
+            y: y,
+            type: type,
+            name: ylabel,
+            orientation: 'v',
+            marker: {
+                color: trafficIncidentColor(ylabel),
+                size: 8
+            }
+        }];
+        
+    }
+    else {
+        for (var i = 0; i < data.length; i++) {
+            row = data[i];
+            x.push(row[xlabel]);
+            y.push(row[ylabel]);
+            c.push(trafficIncidentColor(row[ylabel]));
+        }
+
+        trace = [{
+            x: x,
+            y: y,
+            type: type,
+            orientation: `${orientation}`,
+            marker: {
+                color: c,
+                size: 8
+            }
+        }];
+    }
+
+    Plotly.addTraces(div, trace);
+}
 async function filterDateData() {
     if (document.getElementById("startdate").value !== "") {
         if (document.getElementById("enddate").value !== "") {
@@ -201,18 +280,23 @@ async function filterDateData() {
             await yesterdayIncidentsPlot(data, 'pdata', 'historical_issue_count', 'issue_reported', 'bar', 'h')
 
             // Day of Week chart
-            var data = await spGetDayOfWeek();
+            var data = await spGetDayOfWeek(startDate, endDate);
             await yesterdayIncidentsPlot(data, 'dayofweek', 'day_of_week', 'issue_count', 'bar', 'v')
 
             // Rolling Sum by Issue
             var data = await spRollingSumByIssue(startDate, endDate);
-            await yesterdayIncidentsPlot(data, 'rollingsumissues', 'published_date', 'crash_service', 'line', 'v')
+            await yesterdayIncidentsPlot(data, 'rollingsumissues', 'published_date', 'crash_service', 'line', 'v');
+            for (var i = 0; i < colNames.length; i++){
+                await addIncidentsToPlot(data, 'rollingsumissues','published_date',colNames[i], 'line', 'v');
+            }
 
             // Incident Severity
-            var data = await spIncidentSeverity(formatDate(getPreviousDay()),formatDate(new Date()));
-            await yesterdayIncidentsPlot(data, 'incidentseverity', 'crash_date', 'avg_crash_sev', 'line', 'v')
+            // var data = await spIncidentSeverity(formatDate(getPreviousDay()), formatDate(new Date()));
+            // await yesterdayIncidentsPlot(data, 'incidentseverity', 'crash_date', 'avg_crash_sev', 'line', 'v')
+            
 
-            await loadIncidentTable(formatDate(getPreviousDay()),formatDate(new Date()));
+
+            await loadIncidentTable(formatDate(getPreviousDay()), formatDate(new Date()));
         }
         else {
             alert('shits blank!')
@@ -224,11 +308,11 @@ async function filterDateData() {
 
 }
 
-async function loadIncidentTable(startDate,endDate){
+async function loadIncidentTable(startDate, endDate) {
     var today = new Date(endDate).toISOString();
     var yesterday = new Date(startDate).toISOString();
     let issue;
-    let crashes = await get_yesterdays_data(`${yesterday}`,`${today}`);
+    let crashes = await get_yesterdays_data(`${yesterday}`, `${today}`);
     var Table = document.getElementById("mytablebody");
     Table.innerHTML = "";
     for (var i in crashes) {
@@ -244,12 +328,12 @@ async function loadIncidentTable(startDate,endDate){
         var table = $(`#incidenttable`);
 
         table.append(row);
-        
+
     }
 }
 
 document.getElementById('filter-btn').addEventListener('click',
     filterDateData);
 
-    await init(startDate, endDate);
+await init(startDate, endDate);
 

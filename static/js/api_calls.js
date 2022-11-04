@@ -48,8 +48,8 @@ export async function spGetTrafficIssues(startDate,endDate){
     return data
 }
 
-export async function spGetDayOfWeek(){
-    var uri = `https://vizion-zero-api.azurewebsites.net/StoredProcedures/get-day-of-week`
+export async function spGetDayOfWeek(startDate,endDate){
+    var uri = `https://vizion-zero-api.azurewebsites.net/StoredProcedures/get-day-of-week/${startDate}/${endDate}`
     const response = await fetch(uri,{
         method:'GET'
     })
