@@ -1,0 +1,32 @@
+"Serious_2020"
+
+The Random Forest model that had been trained on traffic incident data from 2013-2019
+was not able to predict serious traffic incidents in 2020 at all. Especially at the very beginning of
+the pandemic, the actual serious accidents were far below what the model predicted for the majority of the year.
+
+"Serious_2021"
+
+However, in 2021, the actual serious crashes were much closer to the predictions throughout the year.
+
+"Pedestrians_2020" & "Pedestrians_2021"
+
+Interestingly, crashes involving pedestrians continued to stay low in 2021 in contrast. After a dip in early 2020, the
+actual crashes involving pedestrians did not reach the model's prediction at any point in 2020 or 2021.
+
+"Crashes_by_Day_of_Week" & "Crashes_by_Hour"
+
+Looking at crashes by the day of the week and the hour shows that, while crashes were down during the COVID pandemic,
+traffic patterns remained the same. During COVID, crashes increased throughout the week, peaking
+on Fridays and Saturdays, and then decreasing again on Sunday -- which is the same pattern found in pre-COVID data, even
+though COVID crashes were much less overall. Similarly, evening rush hour (5-7 pm) was the most dangerous
+time to drive both before and during COVID, despite a decrease across the board in number of crashes.
+
+"Crashes_by_Month"
+
+The average number of all crashes per month in 2013-2019 far surpassed crashes in 2020 or 2021. You can see
+a sharp drop in March of 2020, and throughout the next two years as many are working remotely, crashes remain lower despite an
+increase in Austin's population. This, coupled with the fact that the patterns of crashes remained the same, suggests that the
+best way to decrease crashes is to simply have fewer cars on the road. COVID did not affect when people crash, but just decreased
+their likelihood by keeping former commuters at home. The only question that remains is why, if crashes overall are still down, and crashes
+involving pedestrians are down, why are serious crashes back up to pre-pandemic levels? It could be the result of reckless driving
+caused by stress, or that people who are primarily working from home are worse at driving than before.
