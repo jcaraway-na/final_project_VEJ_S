@@ -1,0 +1,92 @@
+.dark-gry {
+    background: rgba(170, 174, 193, .8)
+}
+
+.light-gry {
+    background: rgba(221, 221, 221, .8)
+}
+
+.black {
+    background: rgba(13, 18, 27, 0.5)
+}
+
+.purple {
+    background: rgba(135, 61, 255, 1)
+}
+
+.white {
+    background: rgba(255, 255, 255, 1)
+}
+
+.map-panels {
+    background: linear-gradient(rgb(255, 255, 255, .8), rgba(252, 252, 252, 0.5));
+    box-shadow: -5px -5px 8px rgb(221, 221, 221, .8),
+        5px 5px 8px rgba(124, 124, 125, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    height: 600px;
+    margin: 1%;
+}
+.panels {
+  background: linear-gradient(rgb(255, 255, 255, .8), rgba(252, 252, 252, 0.5));
+  box-shadow: -5px -5px 8px rgb(221, 221, 221, .8),
+      5px 5px 8px rgba(124, 124, 125, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
+  height: 300px;
+  margin: 1%;
+}
+.panels-map-info {
+  background: linear-gradient(rgb(255, 255, 255, .8), rgba(252, 252, 252, 0.5));
+  box-shadow: -5px -5px 8px rgb(221, 221, 221, .8),
+      5px 5px 8px rgba(124, 124, 125, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
+  height: 150px;
+  margin: 1%;
+}
+/* Style the navbar */
+#navbar {
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  /* Navbar links */
+  #navbar a {
+    float: left;
+    display: block;
+    color: rgba(13, 18, 27, 1);
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* Page content */
+  .content {
+    padding: 16px;
+  }
+  
+  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 60px;
+  }
+  
+#navbar a:hover{
+    background-color: rgba(135, 61, 255, 1);
+    color: white;
+}
+
+.map {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+}

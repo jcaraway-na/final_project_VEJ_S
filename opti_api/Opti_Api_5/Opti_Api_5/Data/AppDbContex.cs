@@ -16,6 +16,21 @@ namespace Opti_Api_5.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CumDayOfWeekDTO>().HasNoKey();
+            modelBuilder.Entity<CumTrafficIssuesDTO>().HasNoKey();
+            modelBuilder.Entity<HistoricalTrafficIssuesDTO>().HasNoKey();
+            modelBuilder.Entity<CrashSeverityDataDTO>().HasNoKey();
+            modelBuilder.Entity<RollingCumByIssueDTO>().HasNoKey();
+        }
+
         public DbSet<CrashModel> Crash { get; set; }
+        public DbSet<RealTimeTrafficModel> Traffic { get; set; }
+        public DbSet<CumDayOfWeekDTO> DayOfWeek { get; set; }
+        public DbSet<CumTrafficIssuesDTO> TrafficIssues { get; set; }
+        public DbSet<HistoricalTrafficIssuesDTO> HistoricalIssues { get; set; }
+        public DbSet<CrashSeverityDataDTO> CrashSeverity { get; set; }
+        public DbSet<RollingCumByIssueDTO> RollingCumByIssue { get; set; }
     }
 }
