@@ -54,7 +54,7 @@ var today = new Date().toISOString();
 var yesterday = getPreviousDay().toISOString();
 
 crashes = await get_yesterdays_data(`${yesterday}`,`${today}`);
-console.log(crashes);
+
 
 function getColor(crashType) {
 	return trafficIncidentColor(crashType);

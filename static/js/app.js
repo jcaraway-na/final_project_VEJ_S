@@ -222,7 +222,6 @@ async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientati
 
 async function addIncidentsToPlot(data, div, xlabel, ylabel, type, orientation) {
 
-    console.log(data);
     var x = [], y = [], c = [];
     var row;
     let trace = [];
