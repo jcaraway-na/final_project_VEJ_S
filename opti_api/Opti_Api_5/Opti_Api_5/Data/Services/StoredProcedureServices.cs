@@ -16,9 +16,9 @@ namespace Opti_Api_5.Data.Services
             _context = contex;
         }
 
-        public List<CumDayOfWeekDTO> GetDayOfWeek()
+        public List<CumDayOfWeekDTO> GetDayOfWeek(string start_date, string end_date)
         {
-            var call = _context.DayOfWeek.FromSqlRaw($"spCumulativeDayOfWeek").ToList();
+            var call = _context.DayOfWeek.FromSqlRaw($"spCumulativeDayOfWeek '{start_date}', '{end_date}'").ToList();
             return call;
         }
 

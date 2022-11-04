@@ -19,10 +19,10 @@ namespace Opti_Api_5.Controllers
         }
 
 
-        [HttpGet("get-day-of-week")]
-        public IActionResult GetDayOfWeek()
+        [HttpGet("get-day-of-week/{start_date}/{end_date}")]
+        public IActionResult GetDayOfWeek(string start_date, string end_date)
         {
-            var call = _spServices.GetDayOfWeek();
+            var call = _spServices.GetDayOfWeek(start_date, end_date);
             return Ok(call);
         }
 
