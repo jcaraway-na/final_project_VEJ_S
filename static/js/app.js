@@ -6,6 +6,13 @@ var startDate = formatDate(getPreviousDay());
 var colNames = ['auto_ped', 'blocked_driv_hwy', 'collision', 'collision_private_property', 'collision_with_injury', 'collisn_lvng_scn',
 'crash_service', 'crash_urgent', 'loose_livestock', 'stalled_vehicle', 'traffic_hazard', 'trfc_hazd_debris', 'vehicle_fire'];
 
+//#region page loader spinner
+let loader = document.querySelector(".loader-big");
+loader.style.display = "flex";
+loader.style.height = '100vh'
+loader.style.width = '100vw'
+//#endregion
+
 async function init(startDate, endDate) {
 
     // Historical issue count chart to right of the map
@@ -336,3 +343,8 @@ document.getElementById('filter-btn').addEventListener('click',
 
 await init(startDate, endDate);
 
+//#region close page loader spinner
+loader.style.display = "none";
+loader.style.height = '0vh'
+loader.style.width = '0vw'
+//#endregion
