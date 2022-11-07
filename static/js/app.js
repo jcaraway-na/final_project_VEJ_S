@@ -1,5 +1,6 @@
 import { get_yesterdays_data, spGetHistoricalTrafficData, spRollingSumByIssue, spGetTrafficIssues, spGetDayOfWeek, spIncidentSeverity } from '../js/api_calls.js';
 import { trafficIncidentColor } from '../js/colors.js';
+import { loadMap,updateMap } from '../js/map.js';
 
 var endDate = formatDate(new Date());
 var startDate = formatDate(getPreviousDay());
@@ -14,6 +15,8 @@ loader.style.width = '100vw'
 //#endregion
 
 async function init(startDate, endDate) {
+
+    await loadMap(formatDate(getPreviousDay()), formatDate(new Date()));
 
     // Historical issue count chart to right of the map
     var data = await spGetHistoricalTrafficData(formatDate(getPreviousDay()), formatDate(new Date()));
@@ -276,10 +279,24 @@ async function addIncidentsToPlot(data, div, xlabel, ylabel, type, orientation) 
     Plotly.addTraces(div, trace);
 }
 async function filterDateData() {
+
+    loader.style.display = "flex";
+    loader.style.height = '100vh'
+    loader.style.width = '100vw'
+
     if (document.getElementById("startdate").value !== "") {
         if (document.getElementById("enddate").value !== "") {
             startDate = document.getElementById("startdate").value;
             endDate = document.getElementById("enddate").value;
+
+            // var container = L.DomUtil.get('map');
+
+            // if(container != null){
+            
+            // container._leaflet_id = null;
+            
+            // }
+            await updateMap(startDate,endDate);
 
             // Historical issue count chart to right of the map
             var data = await spGetHistoricalTrafficData(startDate, endDate);
@@ -311,7 +328,9 @@ async function filterDateData() {
     else {
         alert('shits blank!')
     }
-
+    loader.style.display = "none";
+    loader.style.height = '0vh'
+    loader.style.width = '0vw'
 }
 
 async function loadIncidentTable(startDate, endDate) {
