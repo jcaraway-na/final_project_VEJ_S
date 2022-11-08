@@ -1,5 +1,4 @@
 import { get_yesterdays_data, spGetHistoricalTrafficData } from '../js/api_calls.js';
-import { makePlotly, addToPlotly } from '../js/global-charts.js';
 import { trafficIncidentColor } from '../js/colors.js';
 let crashes = [];
 let markers = [];
