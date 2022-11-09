@@ -1,5 +1,4 @@
 
-
   export async function get_yesterdays_data(startDate,endDate){ 
     return await $.ajax({
         url: `https://data.austintexas.gov/resource/dx9v-zd7x.json?$where=published_date between '${startDate}' and '${endDate}'`,
@@ -12,21 +11,17 @@
   
   }
 
-//   export async function get_last_7_days(){
-// 	var date = new Date();
-// 	date.setDate(date.getDate() - 7);
-// 	let pastWeek = date.toISOString();
-    
-//     let response = await $.ajax({
-//         url: `https://data.austintexas.gov/resource/dx9v-zd7x.json?$where=published_date >= '${pastWeek}'`,
-//         type: "GET",
-//         data: {
-//             "$limit" : 5000,
-//             "$$app_token" : "0yD0kMHDMCcp4ML4nxUsdRK50"
-//         }
-//     });
+  export async function get_incidents_by_issue(startDate,endDate,issue){ 
+    return await $.ajax({
+        url: `https://data.austintexas.gov/resource/dx9v-zd7x.json?$where=published_date between '${startDate}' and '${endDate}' and issue_reported='${issue}'`,
+        type: "GET",
+        data: {
+            "$limit" : 5000,
+            "$$app_token" : "0yD0kMHDMCcp4ML4nxUsdRK50"
+        }
+    });
   
-//   }
+  }
 
 export async function spGetHistoricalTrafficData(startDate,endDate){
     var uri = `https://vizion-zero-api.azurewebsites.net/StoredProcedures/get-historical-traffic-data/${startDate}/${endDate}`
