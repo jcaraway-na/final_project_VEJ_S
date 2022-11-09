@@ -367,7 +367,7 @@ async function loadIncidentTable(startDate, endDate) {
 document.getElementById('filter-btn').addEventListener('click',
     filterDateData);
 
-await init(startDate, endDate);
+await init(startDate, endDate); 
 
 $(document).ready(function(){
     $(document).on('click','#legend tbody tr',async function(){
