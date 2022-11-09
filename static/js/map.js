@@ -106,7 +106,7 @@ export async function updateMap(startDate, endDate) {
 
 	map = L.map('map', {
 		center: [30.2672, -97.7431],
-		zoom: 12,
+		zoom: 10,
 		layers: [streets]
 	});
 
@@ -177,7 +177,7 @@ export async function updateMapByIssue(startDate, endDate,selectedIssue) {
 
 	map = L.map('map', {
 		center: [30.2672, -97.7431],
-		zoom: 12,
+		zoom: 10,
 		layers: [streets]
 	});
 
