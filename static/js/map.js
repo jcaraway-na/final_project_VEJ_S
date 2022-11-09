@@ -19,7 +19,7 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 // Create the map object with center, zoom level and default layer.
 let map = L.map('map', {
 	center: [30.2672, -97.7431],
-	zoom: 12,
+	zoom: 10,
 	layers: [streets]
 });
 
