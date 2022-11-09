@@ -1,6 +1,6 @@
 import { get_yesterdays_data, spGetHistoricalTrafficData, spRollingSumByIssue, spGetTrafficIssues, spGetDayOfWeek, spIncidentSeverity } from '../js/api_calls.js';
 import { trafficIncidentColor } from '../js/colors.js';
-import { loadMap,updateMap } from '../js/map.js';
+import { loadMap,updateMap,updateMapByIssue } from '../js/map.js';
 
 var endDate = formatDate(new Date());
 var startDate = formatDate(getPreviousDay());
@@ -16,6 +16,8 @@ loader.style.width = '100vw'
 
 async function init(startDate, endDate) {
 
+    setDateRange(startDate,endDate);
+    
     await loadMap(formatDate(getPreviousDay()), formatDate(new Date()));
 
     // Historical issue count chart to right of the map
@@ -38,6 +40,13 @@ async function init(startDate, endDate) {
     // await yesterdayIncidentsPlot(data, 'incidentseverity', 'crash_date', 'avg_crash_sev', 'line', 'v');
 
     await loadIncidentTable(formatDate(getPreviousDay()), formatDate(new Date()));
+}
+
+function setDateRange(startDate,endDate){
+    sessionStorage.setItem('dateRange',JSON.stringify({
+        StartDate: startDate,
+        EndDate: endDate
+    }));
 }
 
 function getPreviousDay(date = new Date()) {
@@ -283,19 +292,15 @@ async function filterDateData() {
     loader.style.display = "flex";
     loader.style.height = '100vh'
     loader.style.width = '100vw'
-
+    sessionStorage.removeItem('dateRange');
+    
     if (document.getElementById("startdate").value !== "") {
         if (document.getElementById("enddate").value !== "") {
             startDate = document.getElementById("startdate").value;
             endDate = document.getElementById("enddate").value;
 
-            // var container = L.DomUtil.get('map');
+            setDateRange(startDate,endDate);
 
-            // if(container != null){
-            
-            // container._leaflet_id = null;
-            
-            // }
             await updateMap(startDate,endDate);
 
             // Historical issue count chart to right of the map
@@ -333,6 +338,8 @@ async function filterDateData() {
     loader.style.width = '0vw'
 }
 
+
+
 async function loadIncidentTable(startDate, endDate) {
     var today = new Date(endDate).toISOString();
     var yesterday = new Date(startDate).toISOString();
@@ -361,6 +368,15 @@ document.getElementById('filter-btn').addEventListener('click',
     filterDateData);
 
 await init(startDate, endDate);
+
+$(document).ready(function(){
+    $(document).on('click','#legend tbody tr',async function(){
+        let TrafficIssue = $(this).find('td:eq(1)').text();
+
+        await updateMapByIssue(JSON.parse(sessionStorage.getItem('dateRange')).StartDate,JSON.parse(sessionStorage.getItem('dateRange')).EndDate,TrafficIssue)
+       
+    });
+});
 
 //#region close page loader spinner
 loader.style.display = "none";

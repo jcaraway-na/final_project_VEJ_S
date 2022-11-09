@@ -1,5 +1,4 @@
 
-
   export async function get_yesterdays_data(startDate,endDate){ 
     return await $.ajax({
         url: `https://data.austintexas.gov/resource/dx9v-zd7x.json?$where=published_date between '${startDate}' and '${endDate}'`,
