@@ -93,20 +93,36 @@ year_df = year_df.groupby('year').sum()
 year_df = year_df.merge(pop_df, left_on="year", right_on="year", how="left")
 
 # Upload dataframe to azure db
-payload = {}
-def post_request(payload):
-    print(payload)
-    r = request.post(url = f'https://vizion-zero-api.azurewebsites.net/TotalSeriousAccidentsPerYear/add-totalseriousaccidentsperyear',json=payload)
+# payload = {}
+# def post_request(payload):
+#     print(payload)
+#     r = request.post(url = f'https://vizion-zero-api.azurewebsites.net/TotalSeriousAccidentsPerYear/add-totalseriousaccidentsperyear',json=payload)
     
-    return r
+#     return r
 
-for index,row in year_df.iterrows():
+# for index,row in year_df.iterrows():
 
-    #build out payload
-    payload = {'year': int(row['year'].astype(int)),'serious_fl': int(row['serious_fl'].astype(int)),
-    'id': int(row['id'].astype(int)), 'population': int(row['population'].astype(int)), 'growth_rate': row['growth_rate'].astype(float)}
+#     #build out payload
+#     payload = {'year': int(row['year'].astype(int)),'serious_fl': int(row['serious_fl'].astype(int)),
+#     'id': int(row['id'].astype(int)), 'population': int(row['population'].astype(int)), 'growth_rate': row['growth_rate'].astype(float)}
     
-    print(f'POST status code: {post_request(payload).status_code}.')
+#     print(f'POST status code: {post_request(payload).status_code}.')
+
+#     id = row['id']
+#     # get crash id from db
+#     response = get_crash_by_id(id)
+
+#     if response.status_code == 204:
+#         print(f'Record id {id} not found!')
+#         print(f'POST status code: {post_request(payload).status_code}.')
+#     elif response.status_code == 404 or response.status_code == 403:
+#         if response.status_code == 404:
+#             print(f'End point not found: Status code {response.status_code}.')
+#         else:
+#             print(f'End point is forbidden: Status code {response.status_code}.')
+#     else:
+#         response = put_request(crash_id,payload)
+#         print(f'PUT status code: update row {index} record {crash_id} {response.status_code}.')
 
 
 # Plot the dataframe of total serious accidents per month
@@ -115,7 +131,7 @@ plot_srs.plot()
 # Get precovid data on serious accidents to train model - drop 2012 because it's not a complete month of data
 pcsrs_df = merged_df[(merged_df['year'] < 2020) & (merged_df['year'] > 2012)]
 pcsrs_df = pcsrs_df.merge(plot_srs, left_on='year_month', right_on='year_month', how='left').rename(columns={'serious_fl_y': 'total_serious'})
-pcsrs_df = pcsrs_df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_serious']]
+pcsrs_df = pcsrs_df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_serious']]
 
 # Split into X and Y
 X_srs = pcsrs_df.drop(columns=['total_serious'])
@@ -137,7 +153,7 @@ def predict_srs(start_year, end_year, start_month, end_month):
     plot_df = plot_df.groupby('year_month').sum()
     df = df.merge(plot_df, left_on='year_month', right_on='year_month', how='left')
     df = df.rename(columns={'serious_fl_y': 'total_serious'})
-    df = df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_serious']]
+    df = df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_serious']]
 
     # Split into X and y
     X = df.drop(columns=['total_serious'])
@@ -171,7 +187,7 @@ plot_pedestrians.plot()
 pcpd_df = merged_df[(merged_df['year'] < 2020) & (merged_df['year'] > 2012)]
 pcpd_df = pcpd_df.merge(plot_pedestrians, left_on="year_month", right_on="year_month", how="left")
 pcpd_df = pcpd_df.rename(columns={"pedestrian_fl_y": "total_pedestrian"})
-pcpd_df = pcpd_df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_pedestrian']]
+pcpd_df = pcpd_df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_pedestrian']]
 
 # Split into X and y
 X_pd = pcpd_df.drop(columns=['total_pedestrian'])
@@ -192,7 +208,7 @@ def predict_pedestrians(start_year, end_year, start_month, end_month):
     plot_df = merged_df[['year_month', 'pedestrian_fl']]
     plot_df = plot_df.groupby('year_month').sum()
     df = df.merge(plot_df, left_on='year_month', right_on='year_month', how='left').rename(columns={"pedestrian_fl_y": "total_pedestrian"})
-    df = df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_pedestrian']]
+    df = df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_pedestrian']]
     
     # Split into X and Y
     X = df.drop(columns=['total_pedestrian'])
