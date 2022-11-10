@@ -1,13 +1,65 @@
 # Import dependencies
 import pandas as pd
 import numpy as np
+import requests as request
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 
+#region RESTful API End-Points
+
+# api base url
+base_url = "https://vizion-zero-api.azurewebsites.net/"
+
+# get request end-point
+get_uri = "Crash/get-all-crash_data"
+
+# get request by id end-point
+get_by_id_uri = "Crash/get-crash-by-id"
+
+# post request end-point
+post_uri = "Crash/add-crash"
+
+# put request by id end-point
+put_uri = "Crash/update-crash-by-id"
+
+
+
+# get request end-point
+get_pop_uri = "Population/get-all-population-data"
+
+# get request by id end-point
+get_pop_by_id_uri = "Population/get-population-by-id"
+
+# post request end-point
+post_pop_uri = "Population/add-population"
+
+# put request by id end-point
+put_pop_uri = "Population/update-population-by-id"
+
+#endregion
+
+#region Azure asp.net webApi calls
+def get_request():
+    r = request.get(url = f'{base_url}{get_uri}')
+    
+    response = r.json()
+    
+    return response
+
+def get_all_pop_request():
+    r = request.get(url = f'{base_url}{get_pop_uri}')
+    
+    response = r.json()
+    
+    return response
+
+#endregion
+
 # Import data
-v0_df = pd.read_csv('/Users/elizabethhalprin/Documents/bootcamp/Final_Project/final_project_VEJ_S/python_etl_processing/v0_df.csv')
+# v0_df = pd.read_csv('/Users/elizabethhalprin/Documents/bootcamp/Final_Project/final_project_VEJ_S/python_etl_processing/v0_df.csv')
+v0_df = pd.DataFrame(get_request())
 
 # Create 'serious' flag if crash caused fatality or serious injury
 v0_df['serious_fl'] = v0_df.apply(lambda row: 1 if row['crash_fatal_fl'] == 1 or row['sus_serious_injry_cnt'] == 1 else 0, axis=1)
@@ -20,12 +72,21 @@ v0_df['crash_time'] = pd.to_datetime(v0_df['crash_time'])
 v0_df['hour'] = pd.DatetimeIndex(v0_df['crash_time']).hour
 v0_df['dayofweek'] = pd.to_datetime(v0_df['crash_date']).apply(lambda x: x.weekday())
 
+=======
+print(v0_df)
+
 # Import population csv
-pop_df = pd.read_csv('/Users/elizabethhalprin/Documents/bootcamp/Final_Project/final_project_VEJ_S/python_etl_processing/austin_pop.csv')
+# pop_df = pd.read_csv('/Users/elizabethhalprin/Documents/bootcamp/Final_Project/final_project_VEJ_S/python_etl_processing/austin_pop.csv')
+pop_df = pd.DataFrame(get_all_pop_request())
+pop_df.head(10)
 
 # Merge Vision Zero data with population data
 merged_df = v0_df.merge(pop_df, left_on="year", right_on="Year", how="left").drop(columns='Year')
 merged_df['year_month'] = merged_df['year'].astype(str) + "_" + merged_df['month'].astype(str).str.zfill(2)
+=======
+merged_df = v0_df.merge(pop_df, left_on="year", right_on="year", how="left")
+print(merged_df)
+merged_df['year_month'] = merged_df['year'].astype(str) + "_" + merged_df['month'].astype(str)
 
 # Create dataframe of total serious crashes by month
 plot_srs = merged_df[['year_month', 'serious_fl']]
@@ -34,7 +95,40 @@ plot_srs = plot_srs.groupby('year_month').sum()
 # Create dataframe of total serious crashes by year
 year_df = merged_df[['year', 'serious_fl']]
 year_df = year_df.groupby('year').sum()
-year_df = year_df.merge(pop_df, left_on="year", right_on="Year", how="left")
+year_df = year_df.merge(pop_df, left_on="year", right_on="year", how="left")
+
+# Upload dataframe to azure db
+# payload = {}
+# def post_request(payload):
+#     print(payload)
+#     r = request.post(url = f'https://vizion-zero-api.azurewebsites.net/TotalSeriousAccidentsPerYear/add-totalseriousaccidentsperyear',json=payload)
+    
+#     return r
+
+# for index,row in year_df.iterrows():
+
+#     #build out payload
+#     payload = {'year': int(row['year'].astype(int)),'serious_fl': int(row['serious_fl'].astype(int)),
+#     'id': int(row['id'].astype(int)), 'population': int(row['population'].astype(int)), 'growth_rate': row['growth_rate'].astype(float)}
+    
+#     print(f'POST status code: {post_request(payload).status_code}.')
+
+#     id = row['id']
+#     # get crash id from db
+#     response = get_crash_by_id(id)
+
+#     if response.status_code == 204:
+#         print(f'Record id {id} not found!')
+#         print(f'POST status code: {post_request(payload).status_code}.')
+#     elif response.status_code == 404 or response.status_code == 403:
+#         if response.status_code == 404:
+#             print(f'End point not found: Status code {response.status_code}.')
+#         else:
+#             print(f'End point is forbidden: Status code {response.status_code}.')
+#     else:
+#         response = put_request(crash_id,payload)
+#         print(f'PUT status code: update row {index} record {crash_id} {response.status_code}.')
+
 
 # Plot the dataframe of total serious crashes per month
 plot_srs.plot(color='rebeccapurple', title='Serious Crashes Per Month')
@@ -42,7 +136,7 @@ plot_srs.plot(color='rebeccapurple', title='Serious Crashes Per Month')
 # Get precovid data on serious crashes to train model - drop 2012 because it's not a complete month of data
 pcsrs_df = merged_df[(merged_df['year'] < 2020) & (merged_df['year'] > 2012)]
 pcsrs_df = pcsrs_df.merge(plot_srs, left_on='year_month', right_on='year_month', how='left').rename(columns={'serious_fl_y': 'total_serious'})
-pcsrs_df = pcsrs_df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_serious']]
+pcsrs_df = pcsrs_df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_serious']]
 
 # Split into X and Y
 X_srs = pcsrs_df.drop(columns=['total_serious'])
@@ -64,7 +158,7 @@ def predict_srs(start_year, end_year, start_month, end_month):
     plot_df = plot_df.groupby('year_month').sum()
     df = df.merge(plot_df, left_on='year_month', right_on='year_month', how='left')
     df = df.rename(columns={'serious_fl_y': 'total_serious'})
-    df = df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_serious']]
+    df = df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_serious']]
 
     # Split into X and y
     X = df.drop(columns=['total_serious'])
@@ -100,7 +194,7 @@ plot_pedestrians.plot(color='mediumpurple', title='Crashes Involving Pedestrians
 pcpd_df = merged_df[(merged_df['year'] < 2020) & (merged_df['year'] > 2012)]
 pcpd_df = pcpd_df.merge(plot_pedestrians, left_on="year_month", right_on="year_month", how="left")
 pcpd_df = pcpd_df.rename(columns={"pedestrian_fl_y": "total_pedestrian"})
-pcpd_df = pcpd_df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_pedestrian']]
+pcpd_df = pcpd_df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_pedestrian']]
 
 # Split into X and y
 X_pd = pcpd_df.drop(columns=['total_pedestrian'])
@@ -121,7 +215,7 @@ def predict_pedestrians(start_year, end_year, start_month, end_month):
     plot_df = merged_df[['year_month', 'pedestrian_fl']]
     plot_df = plot_df.groupby('year_month').sum()
     df = df.merge(plot_df, left_on='year_month', right_on='year_month', how='left').rename(columns={"pedestrian_fl_y": "total_pedestrian"})
-    df = df[['year', 'month', 'day', 'hour', 'Population', 'Growth Rate', 'total_pedestrian']]
+    df = df[['year', 'month', 'day', 'hour', 'population', 'growth_rate', 'total_pedestrian']]
     
     # Split into X and Y
     X = df.drop(columns=['total_pedestrian'])

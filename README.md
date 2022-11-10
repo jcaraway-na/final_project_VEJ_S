@@ -2,6 +2,8 @@
 
 ## BACKGROUND
 
+## Try Me: https://jcaraway-na.github.io/final_project_VEJ_S/
+
 ## (Vince - Circle)
 >
 > ### Selected Topic: 
@@ -21,9 +23,9 @@
 ### Contributors
 <table align=center>
   <tr>
-    <td align=center>Router</td>
-    <td align=center>ehalprin</td>
-    <td align=center>vtg401009</td>
+    <td align=center>Jennings</td>
+    <td align=center>Elizabeth</td>
+    <td align=center>Vince</td>
   </tr>
   <tr>
     <td align=center>Square & X</td>
@@ -72,10 +74,20 @@
     <td align=center>
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/app_layout.png?size=50">
     </td>
-  </tr>f
+  </tr>
   <tr>
     <td>
       <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/db_connection/developer_cover.png">
+    </td>
+  </tr>
+    <tr>
+    <td align=center>
+      <strong>Frontend Progress</strong>
+    </td>
+  </tr>
+    <tr>
+    <td align=center>
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/Jennings_Square/resources/images/jennings_readme_resources/images/frontend/frontend_realtime_dashboard.png">
     </td>
   </tr>
 </table>
@@ -131,8 +143,6 @@
 
 ## Triangle (Elizabeth)
 
-> ### Note: Updated ETL Processing and Machine Learning Models are in the Elizabeth-Triangle Branch
-
 <div align=center><strong>ETL Data Processing</strong></div>
 <table align=center>
   <tr>
@@ -142,7 +152,7 @@
   <tr>
     <td>
       <p>
-          The original "Vision Zero" dataset was quite large and had many duplicative and incomplete fields. In reviewing null values, I first dropped all the geographical data besides longitude, latitude, and point, as all the others had a huge number of null values. I also dropped case ID, which also had many nulls; "contributing factors" which had a lot of nulls and no key for the numerial data; the units involved and associated metadata, and confirmed fatality for being repetitive; and information on what kind of road the accident happened on. I then split the date column into date and time, and transformed it into datetime format. I encoded the columns with "Y / N" or "Y" and blanks to "1 / 0". I then dropped the few remaining rows with null values as over 100,000 complete rows remained.
+          The original "Vision Zero" dataset contained data on traffic incidents from 2012 through 2022, with fields on who or what was involved (i.e. pedestrians, motor vehicles, motorcycles, etc.), where and when the incident occurred, the consequences of the event (i.e. the kind and level of injuries), and other information for context (i.e. the speed limit on the road). Using Python and the Pandas library, I dropped columns that either had duplicative or extremely incomplete information, or information that was impossible to parse, including the 'contributing factors' that were numerically encoded without a key. I then dropped rows without complete geographical information, which still left over 100,000 rows of data. Next I broke out the datetime column into subcategories, so that I could later examine incidents by time of day and year, and encoded categorical columns. In examining the data, I decided to create a flag for "serious" incidents, i.e. incidents that either led to a fatality or serious injury, so that I could use that column as the outcome for machine learning. 
       </p>
     </td>
     <td>
@@ -161,7 +171,7 @@
   <tr>
     <td>
       <p>
-          I used a Random Forest Model on a reduced version of the dataset, with just date information, population, growth rate, and the total number of serious accidents per month. Accidents were designated as serious if they either had a fatality or serious injury sustained. I trained the Random Forest Model on data from 2012 through 2019; the model scored highly on both testing and training data. However, when feeding in the data from during the initial COVID lockdown (April through September of 2020), the model turned out to be highly inaccurate, predicting a larger number of serious accidents per month than what happened in reality.
+          Because our data was quite large, but still tabular, and after experimenting with more simplistic models, I decided on the Random Forest Model for our machine learning model. The ultimate goal was to compare pre-pandemic traffic incident data with trafic incident data in 2020 during the COVID pandemic; knowing that we would feed in COVID-era time informaiton, I reduced the original dataset further to only date information, along with population and growth rate that were joined to the Vision Zero dataset in our database, and whether or not an incident was serious as the outcome. I first split the data from 2013-2019 and 2020, so that we could compare information before and after the COVID pandemic. I then split the 2013-2019 "pre-COVID" data into training and testing data using test_train_split, and trained the Random Forest Model using the training data. The model performed extremely well on both training and testing data, but when I then fed in the COVID era data, it performed terribly, predicting serious incidents and incidents involving pedestrians at much higher levels than what actually occurred. I further looked at incidents across time of day, week, and year to look for additional patterns. 
       </p>
     </td>
     <td>
