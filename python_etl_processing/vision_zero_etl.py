@@ -21,6 +21,20 @@ post_uri = "Crash/add-crash"
 # put request by id end-point
 put_uri = "Crash/update-crash-by-id"
 
+
+
+# get request end-point
+get_pop_uri = "Population/get-all-population-data"
+
+# get request by id end-point
+get_pop_by_id_uri = "Population/get-population-by-id"
+
+# post request end-point
+post_pop_uri = "Population/add-population"
+
+# put request by id end-point
+put_pop_uri = "Population/update-population-by-id"
+
 #endregion
 
 
@@ -42,9 +56,21 @@ def get_request():
     response = r.json()
     
     return response
+    
+def get_all_pop_request():
+    r = request.get(url = f'{base_url}{get_pop_uri}')
+    
+    response = r.json()
+    
+    return response
 
 def get_crash_by_id(id):
     r = request.get(url = f'{base_url}{get_by_id_uri}/{id}')
+    
+    return r
+
+def get_pop_by_id(id):
+    r = request.get(url = f'{base_url}{get_pop_by_id_uri}/{id}')
     
     return r
 
@@ -54,8 +80,19 @@ def post_request(payload):
     
     return r
 
+def post_pop_request(payload):
+    print(payload)
+    r = request.post(url = f'{base_url}{post_pop_uri}', json=payload)
+    
+    return r
+
 def put_request(id, payload):
     r = request.put(url = f'{base_url}{put_uri}/{id}', json=payload)
+
+    return r
+
+def put_pop_request(id, payload):
+    r = request.put(url = f'{base_url}{put_pop_uri}/{id}', json=payload)
 
     return r
 
@@ -76,7 +113,7 @@ def get_post_put_request(dataframe):
         # get crash id from db
         response = get_crash_by_id(crash_id)
     
-        test = response.json();
+        test = response.json()
 
         # if crash id != exist then post payload. else put payload
         if response.status_code == 204:
@@ -123,9 +160,24 @@ def get_raw_data():
 
     return v0_df
 
+def read_popdata():
+    df = pd.DataFrame()
+    df = pd.read_csv('python_etl_processing/austin_pop.csv')
+    print(df)
+    df['year'] = df['year'].astype(int)
+    df['population'] = df['population'].astype(int)
+    df['growth_rate'] = df['growth_rate'].astype(float)
+
+    for index, row in df.iterrows():
+
+        # build out payload
+        payload = {'year': row['year'],'population': row['population'], 'growth_rate': row['growth_rate']}
+
+        print(f'POST status code: {post_pop_request(payload).status_code}.')
+        
 
 
 
-
+# read_popdata()
 # Start data pipeline
 get_post_put_request(get_raw_data())
