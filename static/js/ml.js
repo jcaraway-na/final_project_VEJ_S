@@ -1,3 +1,12 @@
+const Control_for_Pop = './ml_csv/Control_for_Pop.csv'
+const Crash_by_Hour = './ml_csv/Crash_by_Hour.csv'
+const Crash_by_Month = './ml_csv/Crash_by_Month.csv'
+const Crash_Day_of_Week = './ml_csv/Crash_Day_of_Week.csv'
+const Pedestrians_2020 = './ml_csv/Pedestrians_2020.csv'
+const Pedestrians_2021 = './ml_csv/Pedestrians_2021.csv'
+const Serious_2020 = './ml_csv/Serious_2020.csv'
+const Serious_2021 = './ml_csv/Serious_2021.csv'
+
 
 export async function makePlotly(data, xlabel, ylabel, divlabel, type,orientation) {
     var x = [], y = [];
@@ -19,6 +28,7 @@ export async function makePlotly(data, xlabel, ylabel, divlabel, type,orientatio
         x: x,
         y: y,
         type: type,
+        name: ylabel,
         orientation: `${orientation}`,
         marker: {
             color: 'rgba(135, 61, 255, .8',
@@ -45,7 +55,7 @@ export async function makePlotly(data, xlabel, ylabel, divlabel, type,orientatio
             },
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
-            height: 300,
+            height: 600,
             margin: {
                 l: 50,
                 r: 55,
@@ -108,6 +118,7 @@ export async function addToPlotly(data, xlabel, ylabel, divlabel, type,orientati
     trace = [{
         x: x,
         y: y,
+        name: ylabel,
         type: type,
         orientation: `${orientation}`,
         marker: {
@@ -118,4 +129,23 @@ export async function addToPlotly(data, xlabel, ylabel, divlabel, type,orientati
 
     Plotly.addTraces(divlabel, trace);
 }
+
+// export function readCsv(uri){
+//     return d3.csv(`${uri}`, function(data) {
+//         console.log(data);
+//     });
+// }
+
+// Serius 2020
+d3.csv(Serious_2020, function(data){ makePlotly(data,'Month','Prediction','serious2020','line','h'),addToPlotly(data,'Month','Actual','serious2020','bar','v','rgba(13, 18, 27, 0.5)') } );
+
+// Serious 2021
+d3.csv(Serious_2021, function(data){ makePlotly(data,'Month','Prediction','serious2021','line','h'),addToPlotly(data,'Month','Actual','serious2021','bar','v','rgba(13, 18, 27, 0.5)') } );
+
+// Ped 2020
+d3.csv(Pedestrians_2020, function(data){ makePlotly(data,'Month','Prediction','ped2020','line','h'),addToPlotly(data,'Month','Actual','ped2020','bar','v','rgba(13, 18, 27, 0.5)') } );
+
+// Ped 2021
+d3.csv(Pedestrians_2021, function(data){ makePlotly(data,'Month','Prediction','ped2021','line','v'),addToPlotly(data,'Month','Actual','ped2021','bar','v','rgba(13, 18, 27, 0.5)') } );
+
 

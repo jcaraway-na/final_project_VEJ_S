@@ -32,5 +32,8 @@ namespace Opti_Api_5.Data
         public DbSet<HistoricalTrafficIssuesDTO> HistoricalIssues { get; set; }
         public DbSet<CrashSeverityDataDTO> CrashSeverity { get; set; }
         public DbSet<RollingCumByIssueDTO> RollingCumByIssue { get; set; }
+        public DbSet<PopulationModel> Population { get; set; }
+        public DbSet<TotalSeriousAccidentsPerYearModel> Tsapy { get; set; }
+        public DbSet<PredictSrsModel> PredictSrs { get; set; }
     }
 }

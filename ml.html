@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col panels-info">
                     <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Plan Surveys</p>
+                        <p style="text-align: center;" class="large-font">Overview</p>
                     </caption>
                     Selected Topic:
                     If the covid pandemic did not happen, how would traffic incidents compare to current traffic
@@ -63,11 +63,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 map-panels">
-                    <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Serious_2020</p>
-                    </caption>
-                    chart
+                <div id="serious2020" class="col-sm-8 map-panels">
                 </div>
                 <div class="col map-panels">
                     <p class="large-font">The Random Forest model that had been trained on traffic incident data from
@@ -86,19 +82,19 @@
                         year.
                     </p>
                 </div>
-                <div class="col-sm-6  map-panels">
-                    <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Serious_2021</p>
-                    </caption>
-                    chart
+                <div id="serious2021" class="col-sm-8  map-panels">
+
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6  map-panels">
-                    <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Pedestrians_2020" & "Pedestrians_2021</p>
-                    </caption>
-                    chart
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div  id="ped2020" class="col panels"></div>
+
+                    </div>
+                    <div class="row">
+                        <div  id="ped2021" class="col panels"></div>
+                    </div>
                 </div>
                 <div class="col map-panels">
                     <p class="large-font">
@@ -123,7 +119,7 @@
                         crashes.
                     </p>
                 </div>
-                <div class="col-sm-6 map-panels">
+                <div id="crashdayofweek" class="col-sm-6 map-panels">
                     <caption style="caption-side:top;">
                         <p style="text-align: center;" class="large-font">Crashes_by_Day_of_Week" & "Crashes_by_Hour</p>
                     </caption>
@@ -131,7 +127,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 map-panels">
+                <div id="crashbymonth" class="col-sm-6 map-panels">
                     <caption style="caption-side:top;">
                         <p style="text-align: center;" class="large-font">Crashes_by_Month</p>
                     </caption>
@@ -158,11 +154,23 @@
                 </div>
             </div>
             <div class="row">
+                <div id="controlforpop" class="col panels">
+                    <caption style="caption-side:top;">
+                        <p style="text-align: center;" class="large-font">Control for Population</p>
+                    </caption>
+                </div>
+                <div class="col-sm-5 panels">
+                    <p class="large-font">
+                        Even controlling for the population of Austin, which continued to grow during the COVID pandemic, crashes were much lower during 2020. In the graph of accidents per capita per month, there's a precipitous drop in early 2020, when, despite more people living in Austin, fewer people were crashing in Austin.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col panels">
                     <caption style="caption-side:top;">
                         <p style="text-align: center;" class="large-font">Summary of Findings</p>
                     </caption>
-                    <p class="large-font">     Using the Vision Zero Crash Report data, we used Python and Pandas to clean and process the data. We then split the data into pre-COVID pandemic (2013-2019) data, and trained a Random Forest Classifier on the pre-COVID data. We then fed data from during the COVID pandemic (March-December 2020) into the Random Forest Classifier to see what the model would predict, versus what actually happened.</p>
+                    <p class="large-font">The Random Forest Model's failure, along with other data analysis on crashes in the two time periods, show a huge decrease in traffic incidents. Because the overall pattern of crashes did not change, and because crashes decreased despite population growth, the most likely explanation is that the increase in remote work during the COVID pandemic simply reduced the number of people on the roads -- and thus the number of people hurt on the roads.</p>
                 </div>
             </div>
             <div class="row">
@@ -178,8 +186,7 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
-    <script type="module" src="static/js/app.js"></script>
-    <script type="module" src="static/js/map.js"></script>
+    <script type="module" src="static/js/ml.js"></script>
     <script type="module" src="static/js/global-charts.js"></script>
 </body>
 

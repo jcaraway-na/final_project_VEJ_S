@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Opti_Api_5.Data;
 
 namespace Opti_Api_5.Migrations
 {
     [DbContext(typeof(AppDbContex))]
-    partial class AppDbContexModelSnapshot : ModelSnapshot
+    [Migration("20221110200651_srsUpdate")]
+    partial class srsUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,7 +259,7 @@ namespace Opti_Api_5.Migrations
                     b.Property<int>("Actual")
                         .HasColumnType("int");
 
-                    b.Property<int>("Crashes_Avoid")
+                    b.Property<int>("Crashes_Avoided")
                         .HasColumnType("int");
 
                     b.Property<string>("Month")
