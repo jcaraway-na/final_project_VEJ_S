@@ -87,7 +87,7 @@
   </tr>
     <tr>
     <td align=center>
-      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/jennings_readme_resources/images/frontend/frontend_realtime_dashboard.png">
+      <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/jennings_readme_resources/images/frontend/19529170-3E34-4E16-8AFB-1B119DFE7DE8.GIF">
     </td>
   </tr>
 </table>
