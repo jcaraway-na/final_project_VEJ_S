@@ -24,8 +24,6 @@ post_uri = "Crash/add-crash"
 # put request by id end-point
 put_uri = "Crash/update-crash-by-id"
 
-
-
 # get request end-point
 get_pop_uri = "Population/get-all-population-data"
 
@@ -294,3 +292,13 @@ months_2021 = months_2021.rename(columns={'crash_id': 'crashes_2021'})
 # Compare months by era
 months_comparison = pd.DataFrame({'Month': precovid_months['month'], 'PreCovid_Crashes_Per_Month': precovid_months['average_precovid'], 'Crashes_2020': months_2020['crashes_2020'], 'Crashes_2021': months_2021['crashes_2021']})
 months_comparison.plot(x='Month', y=['PreCovid_Crashes_Per_Month', 'Crashes_2020', 'Crashes_2021'], title="Average Number of Crashes by Month", color=['rebeccapurple', 'mediumpurple', 'salmon'])
+
+# Control for population
+people_df = merged_df.copy()
+df_totals = people_df[['year_month', 'crash_id']].groupby('year_month', as_index=False).count()
+df_totals = df_totals.rename(columns={'crash_id': 'total_crashes'})
+pop_grow = people_df[['year_month', 'Population', 'Growth Rate']]
+pop_grow = pop_grow.drop_duplicates()
+totals_pop = df_totals.merge(pop_grow, how='left', left_on='year_month', right_on='year_month')
+totals_pop['crashes_per_capita'] = totals_pop['total_crashes'] / totals_pop['Population']
+totals_pop = totals_pop[(totals_pop['year_month'] != '2022_10') & (totals_pop['year_month'] != '2012_10')]
