@@ -130,22 +130,52 @@ export async function addToPlotly(data, xlabel, ylabel, divlabel, type,orientati
     Plotly.addTraces(divlabel, trace);
 }
 
-// export function readCsv(uri){
-//     return d3.csv(`${uri}`, function(data) {
-//         console.log(data);
-//     });
-// }
-
 // Serius 2020
-d3.csv(Serious_2020, function(data){ makePlotly(data,'Month','Prediction','serious2020','line','h'),addToPlotly(data,'Month','Actual','serious2020','bar','v','rgba(13, 18, 27, 0.5)') } );
+d3.csv(Serious_2020, function(data){ 
+    makePlotly(data,'Month','Prediction','serious2020','line','h'),
+    addToPlotly(data,'Month','Actual','serious2020','bar','v','rgba(13, 18, 27, 0.5)') 
+});
 
 // Serious 2021
-d3.csv(Serious_2021, function(data){ makePlotly(data,'Month','Prediction','serious2021','line','h'),addToPlotly(data,'Month','Actual','serious2021','bar','v','rgba(13, 18, 27, 0.5)') } );
+d3.csv(Serious_2021, function(data){ 
+    makePlotly(data,'Month','Prediction','serious2021','line','h'),
+    addToPlotly(data,'Month','Actual','serious2021','bar','v','rgba(13, 18, 27, 0.5)') 
+});
 
 // Ped 2020
-d3.csv(Pedestrians_2020, function(data){ makePlotly(data,'Month','Prediction','ped2020','line','h'),addToPlotly(data,'Month','Actual','ped2020','bar','v','rgba(13, 18, 27, 0.5)') } );
+d3.csv(Pedestrians_2020, function(data){ 
+    makePlotly(data,'Month','Prediction','ped2020','line','h'),
+    addToPlotly(data,'Month','Actual','ped2020','bar','v','rgba(13, 18, 27, 0.5)') 
+});
 
 // Ped 2021
-d3.csv(Pedestrians_2021, function(data){ makePlotly(data,'Month','Prediction','ped2021','line','v'),addToPlotly(data,'Month','Actual','ped2021','bar','v','rgba(13, 18, 27, 0.5)') } );
+d3.csv(Pedestrians_2021, function(data){ 
+    makePlotly(data,'Month','Prediction','ped2021','line','v'),
+    addToPlotly(data,'Month','Actual','ped2021','bar','v','rgba(13, 18, 27, 0.5)') 
+});
 
+// Crash Day of Week
+d3.csv(Crash_Day_of_Week, function(data){ 
+    makePlotly(data,'dayofweek','precovid_average_crashes','crashdayofweek','line','v'),
+    addToPlotly(data,'dayofweek','covid_average_crashes','crashdayofweek','bar','v','rgba(13, 18, 27, 0.5)') 
+});
 
+// Crash by Hour
+d3.csv(Crash_by_Hour, function(data){ 
+    makePlotly(data,'Hour','PreCovid_Crashes','crashbyhour','line','v'),
+    addToPlotly(data,'Hour','Covid_Crashes','crashbyhour','bar','v','rgba(13, 18, 27, 0.5)') 
+});
+
+// Crash by Month
+d3.csv(Crash_by_Month, function(data){ 
+    makePlotly(data,'Month','PreCovid_Crashes_Per_Month','crashbymonth','line','v'),
+    addToPlotly(data,'Month','Crashes_2020','crashbymonth','line','v','rgba(13, 18, 27, 0.5)'),
+    addToPlotly(data,'Month','Crashes_2021','crashbymonth','line','v','rgba(0, 0, 255, 0.5)') 
+});
+
+// Control for Pop
+d3.csv(Control_for_Pop, function(data){ 
+    makePlotly(data,'year_month','total_crashes','controlforpop','line','v'),
+    addToPlotly(data,'year_month','growth_rate','controlforpop','line','v','rgba(13, 18, 27, 0.5)'),
+    addToPlotly(data,'year_month','crashes_per_capita','controlforpop','line','v','rgba(0, 0, 255, 0.5)')
+});
