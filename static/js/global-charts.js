@@ -26,7 +26,7 @@ export async function makePlotly(data, xlabel, ylabel, divlabel, type,orientatio
         }
     }];
 
-    if (divlabel === 'incidentcounts') {
+    if (divlabel === 'serious2020') {
         var layout = {
             xaxis: {
                 title: xlabel,

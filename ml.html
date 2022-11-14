@@ -24,150 +24,301 @@
         <div class="container-fluid">
             <!-- Start Navbar -->
             <div id="navbar" style="z-index: 1100;" class="row sticky">
-                <div class="col-sm-1">
+                <ul style="margin-top: 10px;" class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link" href="./index.html">Real-Time Traffic</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="./ml.html">Traffic Predictions</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="https://nsight-analytics.com/">About</a>
+                    </li>
+                  </ul>
+                  <div class="col"></div>
+                  <div class="col-sm-1.5">
                     <a style="margin-left: 2%; margin-right: 2%;" href="https://nsight-analytics.com/" target="_blank">
                         <object data="static/images/1024px-Texas_Longhorns_logo.svg.png" width="100"
                             height="40"></object></a>
                 </div>
-                <div class="col-sm-0.5"></div>
-                <div class="col-sm-2 large-font">
-                    <a style="margin-left: 2%; margin-right: 2%; margin-top: 1%;" href="./index.html">Real-Time
-                        Traffic</a>
-                </div>
-                <div class="col-sm-2 large-font">
-                    <a style="margin-left: 2%; margin-right: 2%; margin-top: 1%;" href="./ml.html">Traffic
-                        Predictions</a>
-                </div>
-                <div style="text-align: right;" class="col"></div>
             </div>
             <!-- End Navbar -->
-            <div style="height: 70px;" class="row"></div>
+            <div style="height: 100px;" class="row"></div>
             <div class="row">
-                <div class="col panels-info">
+                <div class="col panels-overview">
                     <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Plan Surveys</p>
+                        <p style="text-align: center;" class="large-font">Overview</p>
                     </caption>
-                    Selected Topic:
-                    If the covid pandemic did not happen, how would traffic incidents compare to current traffic
-                    incidents since the pandemic began?
-                    Reason why we selected the topic:
-                    We selected this topic to analyze traffic trends throughout the Central Texas area.
-                    Description of the source data:
-                    Vision Zero Crash data is obtained from the Texas Department of Transportation (TXDOT) Crash Record
-                    Information System (CRIS) database, which is populated by reports submitted by Texas Peace Officers
-                    throughout the state, including Austin Police Department (APD), and maintained by TXDOT.
-                    Questions we hope to answer with the data:
-                    If the covid pandemic did not happen, what would traffic incidents look like through the current
-                    date?
-                    Since the covid pandemic happened, are commuters more or less safe/better or worse drivers?
+                    <table class="table">
+
+                        <tbody>
+                            <tr>
+                                <td><b>Selected Topic:</b></td>
+                                <td><li>If the covid pandemic did not happen, how would traffic incidents compare to current traffic
+                                    incidents since the pandemic began?</li></td>
+                            </tr>
+                            <tr>
+                                <td><b>Reason why we selected the topic:</b></td>
+                                <td><li>We selected this topic to analyze traffic trends throughout the Central Texas area.</li></td>
+                            </tr>
+                            <tr>
+                                <td><b>Description of the source data:</b></td>
+                                <td style="width: 60vw;">
+                                    <li>
+                                        Vision Zero Crash data is obtained from the Texas Department of Transportation (TXDOT) Crash Record
+                                        Information System (CRIS) database, which is populated by reports submitted by Texas Peace Officers
+                                        throughout the state, including Austin Police Department (APD), and maintained by TXDOT.
+                                    </li>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Questions we hope to answer with the data:</b></td>
+                                <td>
+                                    <li>If the covid pandemic did not happen, what would traffic incidents look like through the current
+                                        date?</li>
+                                        <li>Since the covid pandemic happened, are commuters more or less safe/better or worse drivers?</li>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <ul class="list-inline">
+                        <li class="list-inline-item"><b>Selected Topic:</b>
+                            <ul>
+                                <li>If the covid pandemic did not happen, how would traffic incidents compare to current traffic
+                                    incidents since the pandemic began?</li>
+                            </ul>
+                        </li>
+                        <li class="list-inline-item"><b>Reason why we selected the topic:</b>
+                            <ul>
+                                <li>We selected this topic to analyze traffic trends throughout the Central Texas area.</li>
+                            </ul>
+                        </li>
+                        <li class="list-inline-item"><b>Description of the source data:</b>
+                            <ul>
+                                <li>Vision Zero Crash data is obtained from the Texas Department of Transportation (TXDOT) Crash Record
+                                    Information System (CRIS) database, which is populated by reports submitted by Texas Peace Officers
+                                    throughout the state, including Austin Police Department (APD), and maintained by TXDOT.</li>
+                            </ul>
+                        </li>
+                        <li class="list-inline-item"><b>Questions we hope to answer with the data:</b>
+                            <ul>
+                                <li>If the covid pandemic did not happen, what would traffic incidents look like through the current
+                                    date?</li>
+                                    <li>Since the covid pandemic happened, are commuters more or less safe/better or worse drivers?</li>
+                            </ul>
+                        </li>
+                    </ul> -->
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6 map-panels">
-                    <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Serious_2020</p>
-                    </caption>
-                    chart
+            <div class="row light-gry">
+                <div class="col">
+                    <div class="row">
+                        <div id="serious2020" class="col map-panels"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col panels-info">
+                            <caption style="caption-side:top;">
+                                <p style="text-align: center;" class="large-font">Serious Crashes 2020</p>
+                            </caption>
+                            <table class="table">
+                                <tr>
+                                    <td style="width: 90vw;">
+                                        <li class="large-font">The Random Forest model that had been trained on traffic incident data from
+                                                2013-2019
+                                                was not able to predict serious traffic incidents in 2020 at all. Especially at the very
+                                                beginning of
+                                                the pandemic, the actual serious accidents were far below what the model predicted for the
+                                                majority of the year.
+                                        </li>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col map-panels">
-                    <p class="large-font">The Random Forest model that had been trained on traffic incident data from
-                        2013-2019
-                        was not able to predict serious traffic incidents in 2020 at all. Especially at the very
-                        beginning of
-                        the pandemic, the actual serious accidents were far below what the model predicted for the
-                        majority of the year.
-                    </p>
-                </div>
+
             </div>
             <div class="row">
                 <div class="col map-panels">
-                    <p class="large-font">
-                        However, in 2021, the actual serious crashes were much closer to the predictions throughout the
-                        year.
-                    </p>
-                </div>
-                <div class="col-sm-6  map-panels">
                     <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Serious_2021</p>
+                        <p style="text-align: center;" class="large-font">Serious Crashes 2021</p>
                     </caption>
-                    chart
+                    <table class="table">
+                        <tr>
+                            <td style="width: 10vw;">
+                                <li class="large-font">However, in 2021, the actual serious crashes were much closer to the predictions throughout the
+                                    year.
+                                </li>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="serious2021" class="col-sm-8  map-panels">
+
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6  map-panels">
-                    <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Pedestrians_2020" & "Pedestrians_2021</p>
-                    </caption>
-                    chart
+            <div class="row light-gry">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div id="ped2020" class="col panels"></div>
+
+                    </div>
+                    <div class="row">
+                        <div id="ped2021" class="col panels"></div>
+                    </div>
                 </div>
                 <div class="col map-panels">
-                    <p class="large-font">
-                        Interestingly, crashes involving pedestrians continued to stay low in 2021 in contrast. After a
-                        dip in early 2020, the
-                        actual crashes involving pedestrians did not reach the model's prediction at any point in 2020
-                        or 2021.
-                    </p>
+                    <caption style="caption-side:top;">
+                        <p style="text-align: center;" class="large-font">Crashes Involving Pedestrians 2020 & 2021</p>
+                    </caption>
+                    <table class="table">
+                        <tr>
+                            <td style="width: 10vw;">
+                                <li class="large-font">Interestingly, crashes involving pedestrians continued to stay low in 2021 in contrast. After a
+                                    dip in early 2020, the
+                                    actual crashes involving pedestrians did not reach the model's prediction at any point in 2020
+                                    or 2021.
+                                </li>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="row">
                 <div class="col  map-panels">
-                    <p class="large-font">
-                        Looking at crashes by the day of the week and the hour shows that, while crashes were down
-                        during the COVID pandemic,
-                        traffic patterns remained the same. During COVID, crashes increased throughout the week, peaking
-                        on Fridays and Saturdays, and then decreasing again on Sunday -- which is the same pattern found
-                        in pre-COVID data, even
-                        though COVID crashes were much less overall. Similarly, evening rush hour (5-7 pm) was the most
-                        dangerous
-                        time to drive both before and during COVID, despite a decrease across the board in number of
-                        crashes.
-                    </p>
-                </div>
-                <div class="col-sm-6 map-panels">
                     <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Crashes_by_Day_of_Week" & "Crashes_by_Hour</p>
+                        <p style="text-align: center;" class="large-font">Crash by Day of Week & by Hour</p>
                     </caption>
-                    chart
+                    <table class="table">
+                        <tr>
+                            <td style="width: 10vw;">
+                                <li class="large-font">Looking at crashes by the day of the week and the hour shows that, while crashes were down
+                                    during the COVID pandemic,
+                                    traffic patterns remained the same. During COVID, crashes increased throughout the week, peaking
+                                    on Fridays and Saturdays, and then decreasing again on Sunday -- which is the same pattern found
+                                    in pre-COVID data, even
+                                    though COVID crashes were much less overall. Similarly, evening rush hour (5-7 pm) was the most
+                                    dangerous
+                                    time to drive both before and during COVID, despite a decrease across the board in number of
+                                    crashes.
+                                </li>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 map-panels">
-                    <caption style="caption-side:top;">
-                        <p style="text-align: center;" class="large-font">Crashes_by_Month</p>
-                    </caption>
-                    chart
-                </div>
-                <div class="col map-panels">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div id="crashdayofweek" class="col panels"></div>
 
-                    <p class="large-font">
-                        The average number of all crashes per month in 2013-2019 far surpassed crashes in 2020 or 2021.
-                        You can see
-                        a sharp drop in March of 2020, and throughout the next two years as many are working remotely,
-                        crashes remain lower despite an
-                        increase in Austin's population. This, coupled with the fact that the patterns of crashes
-                        remained the same, suggests that the
-                        best way to decrease crashes is to simply have fewer cars on the road. COVID did not affect when
-                        people crash, but just decreased
-                        their likelihood by keeping former commuters at home. The only question that remains is why, if
-                        crashes overall are still down, and crashes
-                        involving pedestrians are down, why are serious crashes back up to pre-pandemic levels? It could
-                        be the result of reckless driving
-                        caused by stress, or that people who are primarily working from home are worse at driving than
-                        before.
-                    </p>
+                    </div>
+                    <div class="row">
+                        <div id="crashbyhour" class="col panels"></div>
+                    </div>
                 </div>
             </div>
+            <div class="row light-gry">
+                <div class="col">
+                    <div class="row">
+                        <div id="crashbymonth" class="col panels-incident-count"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col panels">
+                            <caption style="caption-side:top;">
+                                <p style="text-align: center;" class="large-font">Crash by Day of Week & by Hour</p>
+                            </caption>
+                            <table class="table">
+                                <tr>
+                                    <td style="width: 10vw;">
+                                        <li class="large-font">The average number of all crashes per month in 2013-2019 far surpassed crashes in 2020
+                                            or
+                                            2021.
+                                            You can see
+                                            a sharp drop in March of 2020, and throughout the next two years as many are working
+                                            remotely,
+                                            crashes remain lower despite an
+                                            increase in Austin's population. This, coupled with the fact that the patterns of
+                                            crashes
+                                            remained the same, suggests that the
+                                            best way to decrease crashes is to simply have fewer cars on the road. COVID did not
+                                            affect
+                                            when
+                                            people crash, but just decreased
+                                            their likelihood by keeping former commuters at home. The only question that remains is
+                                            why,
+                                            if
+                                            crashes overall are still down, and crashes
+                                            involving pedestrians are down, why are serious crashes back up to pre-pandemic levels?
+                                            It
+                                            could
+                                            be the result of reckless driving
+                                            caused by stress, or that people who are primarily working from home are worse at
+                                            driving
+                                            than
+                                            before.
+                                        </li>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
             <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div id="controlforpoptotalcrashes" class="col panels"></div>
+                    </div>
+                    <div class="row">
+                        <div id="controlforpopgrowthrate" class="col panels"></div>
+                    </div>
+                    <div class="row">
+                        <div id="controlforpopcrashespercapita" class="col panels"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col panels-info">
+                            <caption style="caption-side:top;">
+                                <p style="text-align: center;" class="large-font">Control for Population</p>
+                            </caption>
+                            <table class="table">
+                                <tr>
+                                    <td style="width: 10vw;">
+                                        <li class="large-font">Even controlling for the population of Austin, which continued to grow during the COVID
+                                            pandemic, crashes were much lower during 2020. In the graph of accidents per capita per month,
+                                            there's a precipitous drop in early 2020, when, despite more people living in Austin, fewer
+                                            people were crashing in Austin.
+                                        </li>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row light-gry">
                 <div class="col panels">
                     <caption style="caption-side:top;">
                         <p style="text-align: center;" class="large-font">Summary of Findings</p>
                     </caption>
-                    <p class="large-font">     Using the Vision Zero Crash Report data, we used Python and Pandas to clean and process the data. We then split the data into pre-COVID pandemic (2013-2019) data, and trained a Random Forest Classifier on the pre-COVID data. We then fed data from during the COVID pandemic (March-December 2020) into the Random Forest Classifier to see what the model would predict, versus what actually happened.</p>
+                    <table class="table">
+                        <tr>
+                            <td style="width: 10vw;">
+                                <li class="large-font">The Random Forest Model's failure, along with other data analysis on crashes
+                                    in the two time periods, show a huge decrease in traffic incidents. Because the overall pattern
+                                    of crashes did not change, and because crashes decreased despite population growth, the most
+                                    likely explanation is that the increase in remote work during the COVID pandemic simply reduced
+                                    the number of people on the roads -- and thus the number of people hurt on the roads.
+                                </li>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="row">
                 <div class="col map-panels">
-                    <img src="https://github.com/jcaraway-na/final_project_VEJ_S/blob/main/resources/images/jennings_readme_resources/images/db_connection/webapi_win.gif" width=100% height=100%>
+                    <div style="width:100%"><div style="height:0;padding-bottom:75%;position:relative;width:100%"><iframe allowfullscreen="" frameBorder="0" height="70%" src="https://giphy.com/embed/uhYPkjP03h9RvVdazZ/video" style="left:0;position:absolute;top:0" width="100%"></iframe></div></div>
                 </div>
             </div>
         </div>
@@ -178,8 +329,7 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
-    <script type="module" src="static/js/app.js"></script>
-    <script type="module" src="static/js/map.js"></script>
+    <script type="module" src="static/js/ml.js"></script>
     <script type="module" src="static/js/global-charts.js"></script>
 </body>
 

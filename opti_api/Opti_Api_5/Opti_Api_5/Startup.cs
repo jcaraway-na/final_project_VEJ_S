@@ -36,6 +36,9 @@ namespace Opti_Api_5
             services.AddTransient<CrashServices>();
             services.AddTransient<TrafficServices>();
             services.AddTransient<StoredProcedureServices>();
+            services.AddTransient<PopulationServices>();
+            services.AddTransient<TotalSeriousAccidentsPerYearServices>();
+            services.AddTransient<PredictSrsServices>();
             var key = _configuration.GetValue<string>("ApiSettings:Secret");
 
             services.AddAuthentication(x =>
