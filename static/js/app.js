@@ -1,6 +1,8 @@
 import { get_yesterdays_data, spGetHistoricalTrafficData, spRollingSumByIssue, spGetTrafficIssues, spGetDayOfWeek, spIncidentSeverity } from '../js/api_calls.js';
 import { trafficIncidentColor } from '../js/colors.js';
 import { loadMap,updateMap,updateMapByIssue } from '../js/map.js';
+const startDateDiv = document.getElementById('startdatefilt');
+const endDateDiv = document.getElementById('enddatefilt');
 
 var endDate = formatDate(new Date());
 var startDate = formatDate(getPreviousDay());
@@ -35,11 +37,8 @@ async function init(startDate, endDate) {
         await addIncidentsToPlot(data, 'rollingsumissues','published_date',colNames[i], 'line', 'v');
     }
 
-    // Incident Severity
-    // var data = await spIncidentSeverity(formatDate(getPreviousDay()),formatDate(new Date()));
-    // await yesterdayIncidentsPlot(data, 'incidentseverity', 'crash_date', 'avg_crash_sev', 'line', 'v');
-
     await loadIncidentTable(formatDate(getPreviousDay()), formatDate(new Date()));
+
 }
 
 function setDateRange(startDate,endDate){
@@ -47,6 +46,8 @@ function setDateRange(startDate,endDate){
         StartDate: startDate,
         EndDate: endDate
     }));
+    startDateDiv.innerText = startDate;
+    endDateDiv.innerText = endDate;
 }
 
 function getPreviousDay(date = new Date()) {
@@ -150,24 +151,23 @@ async function yesterdayIncidentsPlot(data, div, xlabel, ylabel, type, orientati
     else if (div === 'dayofweek') {
         var layout = {
             xaxis: {
-                title: xlabel,
+                title: 'Day of Week',
                 gridcolor: 'rgba(0,0,0,.2)',
                 autorange: 'reversed'
             },
             yaxis: {
-                title: ylabel,
+                title: 'Number of Crashes',
                 gridcolor: 'rgba(0,0,0,.2)',
             },
 
-            showlegend: true,
+            showlegend: false,
             legend: {
                 x: 1,
-                xanchor: 'right',
                 y: 1
             },
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
-            height: 300,
+            height: 450,
             margin: {
                 l: 50,
                 r: 55,
@@ -324,7 +324,7 @@ async function filterDateData() {
             
 
 
-            await loadIncidentTable(formatDate(getPreviousDay()), formatDate(new Date()));
+            await loadIncidentTable(startDate,endDate);
         }
         else {
             alert('shits blank!')
@@ -344,9 +344,10 @@ async function loadIncidentTable(startDate, endDate) {
     var today = new Date(endDate).toISOString();
     var yesterday = new Date(startDate).toISOString();
     let issue;
-    let crashes = await get_yesterdays_data(`${yesterday}`, `${today}`);
+    let crashes = [];
+    crashes = await get_yesterdays_data(`${yesterday}`, `${today}`);
     var Table = document.getElementById("mytablebody");
-    Table.innerHTML = "";
+    $("#mytablebody tr").remove();
     for (var i in crashes) {
         issue = trafficIncidentColor(crashes[i].issue_reported);
         var row = `<tr style="background-color:${issue};">
@@ -367,7 +368,7 @@ async function loadIncidentTable(startDate, endDate) {
 document.getElementById('filter-btn').addEventListener('click',
     filterDateData);
 
-await init(startDate, endDate); 
+await init(startDate, endDate);
 
 $(document).ready(function(){
     $(document).on('click','#legend tbody tr',async function(){

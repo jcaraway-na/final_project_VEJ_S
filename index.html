@@ -116,14 +116,24 @@
             </div>
             <div class="row">
                 <!-- <div id="incidentseverity" class="col panels"></div> -->
-                <div id="dayofweek" class="col panels"></div>
-                <div class="col-sm-4  panels">
+                <div id="dayofweek" class="col panels-incident-count"></div>
+                <div class="col-sm-4  panels-incident-count">
                     <caption style="caption-side:top;">
                         <p style="text-align: center;" class="large-font">Query Traffic Data</p>
                     </caption>
                     <!-- data filter starts here -->
                     <form class="">
                         <p>Select a start date and end date range.</p>
+                        <table class="table table-condensed">
+                            <tr>
+                                <td class="large-font">Start Date</td>
+                                <td class="large-font">End Date</td>
+                            </tr>
+                            <tr>
+                                <td><span id ="startdatefilt" class="large-font"></span></td>
+                                <td><span id ="enddatefilt" class="large-font"></span></td>
+                            </tr>
+                        </table>
                         <ul class="list-group">
                             <!-- Filter 1-->
                             <li class="list-group" class="btn-light">
