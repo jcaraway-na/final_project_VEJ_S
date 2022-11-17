@@ -4,6 +4,8 @@
 
 ## Try Me: https://jcaraway-na.github.io/final_project_VEJ_S/
 
+## Slides: https://docs.google.com/presentation/d/1QBldkB8cn8Bs4QEvjuFqyxU8e-m7jrg_jAKyL9xLiXU/edit?usp=sharing 
+
 ## (Vince - Circle)
 >
 > ### Selected Topic: 
